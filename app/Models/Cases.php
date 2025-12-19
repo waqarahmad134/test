@@ -21,16 +21,20 @@ class Cases extends Model
         return $this->belongsTo('App\Models\Court');
     }
     public function cname($id) {
-        return \App\Models\Court::find($id)->name;
+        $court = \App\Models\Court::find($id);
+        return $court ? $court->name : '';
     }
     public function sname($id) {
-        return \App\Models\Subcat::find($id)->name;
+        $subcat = \App\Models\Subcat::find($id);
+        return $subcat ? $subcat->name : '';
     }
     public function jname($id) {
-        return \App\Models\Judge::find($id)->name;
+        $judge = \App\Models\Judge::find($id);
+        return $judge ? $judge->name : '';
     }
     public function psname($id) {
-        return \App\Models\PS::find($id)->name;
+        $ps = \App\Models\PS::find($id);
+        return $ps ? $ps->name : '';
     }
 
     public function u($id) {
