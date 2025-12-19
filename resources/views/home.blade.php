@@ -189,12 +189,29 @@ $subTitle = '';
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Dynamic table data will be added here later -->
-                            <tr>
-                                <td colspan="9" class="text-center py-24">
-                                    <p class="text-secondary-light mb-0">Table data will be loaded dynamically</p>
-                                </td>
-                            </tr>
+                            @forelse($recentCases ?? [] as $index => $case)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $case->caset ?? 'N/A' }}</td>
+                                    <td>{{ $case->cnic ?? 'N/A' }}</td>
+                                    <td>{{ $case->p1 ?? 'N/A' }}</td>
+                                    <td>{{ $case->p2 ?? 'N/A' }}</td>
+                                    <td>{{ $case->i_date ? \Carbon\Carbon::parse($case->i_date)->format('Y-m-d') : 'N/A' }}</td>
+                                    <td>{{ $case->i_no ?? 'N/A' }}</td>
+                                    <td>{{ $case->cname($case->cat) ?? 'N/A' }}</td>
+                                    <td>
+                                        <a href="{{ url('finalprint/'.$case->id) }}" class="btn btn-warning btn-sm" target="_blank" title="View">
+                                            <iconify-icon icon="solar:eye-bold"></iconify-icon>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center py-24">
+                                        <p class="text-secondary-light mb-0">No recent cases found</p>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

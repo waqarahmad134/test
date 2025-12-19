@@ -44,8 +44,11 @@ class DashboardController extends Controller
         $totalJudges = Judge::count();
         $totalPS = PS::count();
         
+        // Get recent cases (last 10)
+        $recentCases = (clone $baseQuery)->latest('created_at')->take(10)->get();
+        
         // Return to view
-        return view('home', compact('u', 'total', 'monthly', 'criminal', 'civil', 'misc', 'totalCourts', 'totalJudges', 'totalPS'));
+        return view('home', compact('u', 'total', 'monthly', 'criminal', 'civil', 'misc', 'totalCourts', 'totalJudges', 'totalPS', 'recentCases'));
                 
     }
                     

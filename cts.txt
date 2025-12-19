@@ -1,3 +1,9 @@
 AAaa11@@AAopen2code.com
-u442793684_ims
-u442793684_ims
+u442793684_ims (DB name)
+ssh -p 65002 u442793684@109.106.251.30
+
+judge trasffer option , like if judge change then file trasnfer to new judge
+institutation assign kary ga new file
+
+court main new case ko institution kehny hen  (file)
+
