@@ -1,17 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AiapplicationController;
-use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\ChartController;
-use App\Http\Controllers\ComponentpageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CaseController;
-use App\Http\Controllers\FormsController;
-use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\TableController;
-use App\Http\Controllers\UsersController;
 
 use App\Models\Tehsil;
 
@@ -65,9 +57,7 @@ Route::get('cnic/{id}', [CaseController::class, 'cnic'])->name('cnic');
 Route::get('fir/{id}', [CaseController::class, 'fir'])->name('fir');
 Route::get('/search', [DashboardController::class, 'search'])->name('search');
 Route::get('/searching', [welcome::class, 'searching'])->name('search');
-Route::get('importExportView', function(){
-    return view('import');
-});
+// Removed importExportView route - import view deleted
 // Route::get('export', [MyController::class, 'export'])->name('export'); // MyController not found - commented out
 Route::post('import', [UserController::class, 'import'])->name('import');
 Route::post('/find', [CaseController::class, 'find'])->name('find');
@@ -103,23 +93,7 @@ Route::get('/prnpriview', [PrintController::class, 'prnpriview']);
 Route::get('/webcam', [UserController::class, 'webcam']);
 Route::post('/webcam', [UserController::class, 'wstore'])->name('webcam.capture');
 
-Route::get('qr', function () {
-
-  
-
-    \QrCode::size(500)
-
-            ->format('png')
-
-            ->generate('osms.dsjmuzaffargarh.com/public', public_path('images/qrcode.png'));
-
-    
-
-  return view('qr');
-
-    
-
-});
+// Removed qr route - qr view deleted
 
 
 // Auth::routes();
@@ -228,95 +202,8 @@ Route::get('qr', function () {
 //     Route::get('veiwdetails', 'veiwDetails')->name('veiwDetails');
 // });
 
-// aiApplication
-Route::prefix('aiapplication')->group(function () {
-    Route::controller(AiapplicationController::class)->group(function () {
-        Route::get('/codegenerator', 'codeGenerator')->name('codeGenerator');
-        Route::get('/codegeneratornew', 'codeGeneratorNew')->name('codeGeneratorNew');
-        Route::get('/imagegenerator', 'imageGenerator')->name('imageGenerator');
-        Route::get('/textgeneratornew', 'textGeneratorNew')->name('textGeneratorNew');
-        Route::get('/textgenerator', 'textGenerator')->name('textGenerator');
-        Route::get('/videogenerator', 'videoGenerator')->name('videoGenerator');
-        Route::get('/voicegenerator', 'voiceGenerator')->name('voiceGenerator');
-    });
-});
-
-// Authentication
-Route::prefix('authentication')->group(function () {
-    Route::controller(AuthenticationController::class)->group(function () {
-        Route::get('/forgotpassword', 'forgotPassword')->name('forgotPassword');
-        Route::get('/signin', 'signIn')->name('signIn');
-        Route::get('/signup', 'signUp')->name('signUp');
-    });
-});
-
-// chart
-Route::prefix('chart')->group(function () {
-    Route::controller(ChartController::class)->group(function () {
-        Route::get('/columnchart', 'columnChart')->name('columnChart');
-        Route::get('/linechart', 'lineChart')->name('lineChart');
-        Route::get('/piechart', 'pieChart')->name('pieChart');
-    });
-});
-
-// Componentpage
-Route::prefix('componentspage')->group(function () {
-    Route::controller(ComponentpageController::class)->group(function () {
-        Route::get('/alert', 'alert')->name('alert');
-        Route::get('/avatar', 'avatar')->name('avatar');
-        Route::get('/badges', 'badges')->name('badges');
-        Route::get('/button', 'button')->name('button');
-        Route::get('/calendar', 'calendar')->name('calendar');
-        Route::get('/card', 'card')->name('card');
-        Route::get('/carousel', 'carousel')->name('carousel');
-        Route::get('/colors', 'colors')->name('colors');
-        Route::get('/dropdown', 'dropdown')->name('dropdown');
-        Route::get('/imageupload', 'imageUpload')->name('imageUpload');
-        Route::get('/list', 'list')->name('list');
-        Route::get('/pagination', 'pagination')->name('pagination');
-        Route::get('/progress', 'progress')->name('progress');
-        Route::get('/radio', 'radio')->name('radio');
-        Route::get('/starrating', 'starRating')->name('starRating');
-        Route::get('/switch', 'switch')->name('switch');
-        Route::get('/tabs', 'tabs')->name('tabs');
-        Route::get('/tags', 'tags')->name('tags');
-        Route::get('/tooltip', 'tooltip')->name('tooltip');
-        Route::get('/typography', 'typography')->name('typography');
-        Route::get('/videos', 'videos')->name('videos');
-    });
-});
-
-// Dashboard
-Route::prefix('dashboard')->group(function () {
-    Route::controller(DashboardController::class)->group(function () {
-        Route::get('/index', 'index')->name('index');
-        Route::get('/index2', 'index2')->name('index2');
-        Route::get('/index3', 'index3')->name('index3');
-        Route::get('/index4', 'index4')->name('index4');
-        Route::get('/index5', 'index5')->name('index5');
-        Route::get('/wallet', 'wallet')->name('wallet');
-    });
-});
-
-// Forms
-Route::prefix('forms')->group(function () {
-    Route::controller(FormsController::class)->group(function () {
-        Route::get('/form-layout', 'formLayout')->name('formLayout');
-        Route::get('/form-validation', 'formValidation')->name('formValidation');
-        Route::get('/form', 'form')->name('form');
-        Route::get('/wizard', 'wizard')->name('wizard');
-    });
-});
-
-// invoice/invoiceList
-Route::prefix('invoice')->group(function () {
-    Route::controller(InvoiceController::class)->group(function () {
-        Route::get('/invoice-add', 'invoiceAdd')->name('invoiceAdd');
-        Route::get('/invoice-edit', 'invoiceEdit')->name('invoiceEdit');
-        Route::get('/invoice-list', 'invoiceList')->name('invoiceList');
-        Route::get('/invoice-preview', 'invoicePreview')->name('invoicePreview');
-    });
-});
+// Removed demo routes: aiapplication, authentication, chart, componentspage, forms, invoice
+// These were template/demo routes and have been cleaned up
 
 // Settings
 Route::prefix('settings')->group(function () {
@@ -330,31 +217,7 @@ Route::prefix('settings')->group(function () {
         Route::get('/notification-alert', 'notificationAlert')->name('notificationAlert');
         Route::get('/payment-gateway', 'paymentGateway')->name('paymentGateway');
         Route::get('/theme', 'theme')->name('theme');
+        Route::post('/update-theme', 'updateTheme')->name('settings.updateTheme');
     });
 });
 
-// Table
-Route::prefix('table')->group(function () {
-    Route::controller(TableController::class)->group(function () {
-        Route::get('/tablebasic', 'tableBasic')->name('tableBasic');
-        Route::get('/tabledata', 'tableData')->name('tableData');
-    });
-});
-
-// Users
-Route::prefix('users')->group(function () {
-    Route::controller(UsersController::class)->group(function () {
-        Route::get('/add-user', 'addUser')->name('addUser');
-        Route::get('/users-grid', 'usersGrid')->name('usersGrid');
-        Route::get('/users-list', 'usersList')->name('usersList');
-        Route::get('/view-profile', 'viewProfile')->name('viewProfile');
-    });
-});
-
-
-// Route::get('/tehsils', 'App\Http\Controllers\TehsilsController@index')->name('tehsils');
-// Route::get('/tehsils/{id}/edit', 'App\Http\Controllers\TehsilsController@edit');
-// Route::post('/tehsilsupdate/{id}', 'App\Http\Controllers\TehsilsController@update');
-// Route::post('/tehsils/{id}', 'App\Http\Controllers\TehsilsController@delete');
-// Route::post('/tehsils', 'App\Http\Controllers\TehsilsController@store')->name('tehsils.store');
-// Route::get('/get-tehsils/{district_id}', 'App\Http\Controllers\TehsilsController@getTehsils');

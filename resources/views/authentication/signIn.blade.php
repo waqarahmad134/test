@@ -50,7 +50,7 @@
         <div class="auth-right py-32 px-24 d-flex flex-column justify-content-center">
             <div class="max-w-464-px mx-auto w-100">
                 <div>
-                    <a href="{{  route('index') }}" class="mb-40 max-w-290-px">
+                    <a href="{{ route('home') }}" class="mb-40 max-w-290-px">
                         <img src="{{ asset('public/assets/images/logo.png') }}" alt="">
                     </a>
                     <h4 class="mb-12">Sign In to your Account</h4>
@@ -98,7 +98,7 @@
                         </button>
                     </div>
                     <div class="mt-32 text-center text-sm">
-                        <p class="mb-0">Don’t have an account? <a href="{{  route('signUp') }}" class="text-primary-600 fw-semibold">Sign Up</a></p>
+                        <p class="mb-0">Don't have an account? <a href="{{ route('register') }}" class="text-primary-600 fw-semibold">Sign Up</a></p>
                     </div>
 
                 </form>

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Form;
-use App\Models\Charge;
 use App\Models\User;
 use App\Models\Challan;
 use App\Models\Fir;
@@ -172,28 +170,5 @@ class DashboardController extends Controller
     // }
 
 
-    public function index2()
-    {
-        return view('dashboard/index2');
-    }
-
-    public function index3()
-    {
-        return view('dashboard/index3');
-    }
-
-    public function index4()
-    {
-        return view('dashboard/index4');
-    }
-
-    public function index5()
-    {
-        return view('dashboard/index5');
-    }
-
-    public function wallet()
-    {
-        return view('dashboard/wallet');
-    }
+    // Removed unused demo dashboard methods: index2, index3, index4, index5, wallet
 }

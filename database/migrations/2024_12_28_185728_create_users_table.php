@@ -13,22 +13,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('is_agent')->default(false);
             $table->enum('status', ['active', 'inactive'])->default('active'); 
             $table->string('password');
             $table->rememberToken();
             $table->string('role')->default('user');
-            $table->unsignedBigInteger('district_id')->nullable();
-            $table->unsignedBigInteger('tehsil_id')->nullable();
-            $table->unsignedBigInteger('station_id')->nullable();
             $table->timestamps();
-
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('set null');
-            $table->foreign('tehsil_id')->references('id')->on('tehsils')->onDelete('set null');
-            $table->foreign('station_id')->references('id')->on('police_stations')->onDelete('set null');
-
-            $table->index('district_id');
-            $table->index('tehsil_id');
-            $table->index('station_id');
         });
     }
 

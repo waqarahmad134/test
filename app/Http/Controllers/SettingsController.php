@@ -115,7 +115,41 @@ class SettingsController extends Controller
     
     public function theme()
     {
-        return view('settings/theme');
+        $user = Auth::user();
+        return view('settings/theme', compact('user'));
+    }
+    
+    public function updateTheme(Request $request)
+    {
+        $user = Auth::user();
+        
+        $validator = Validator::make($request->all(), [
+            'theme_mode' => 'nullable|in:light,dark',
+            'theme_color' => 'nullable|in:blue,magenta,orange,green,red,blueDark',
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+        
+        if ($request->has('theme_mode')) {
+            $user->theme_mode = $request->theme_mode;
+        }
+        
+        if ($request->has('theme_color')) {
+            $user->theme_color = $request->theme_color;
+        }
+        
+        $user->save();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Theme updated successfully'
+        ]);
     }
     
 }

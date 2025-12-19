@@ -1,6 +1,6 @@
 <!-- meta tags and other links -->
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="{{ auth()->check() && auth()->user()->theme_mode ? auth()->user()->theme_mode : 'light' }}">
 
 <x-head />
 <style>
