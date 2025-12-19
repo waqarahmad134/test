@@ -10,7 +10,6 @@ use App\Models\Subcat;
 use App\Models\User;
 use App\Models\PS;
 use Carbon\Carbon;
-use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;

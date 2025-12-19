@@ -15,7 +15,6 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ChallanController;
 use App\Http\Controllers\FirController;
 use App\Http\Controllers\AutocompleteController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CourtController;
 use App\Http\Controllers\JudgeController;
 use App\Http\Controllers\PSController;
@@ -23,7 +22,6 @@ use App\Http\Controllers\SubcatController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\welcome;
 use App\Http\Controllers\PrintController;
-use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\Auth\LoginController;
 
 
@@ -69,7 +67,6 @@ Route::get('casesc', [CaseController::class, 'civil'])->name('cases.civil');
 Route::get('search/{f}/{t}/{type}', [CaseController::class, 'search'])->name('cases.search');
 Route::get('csearch', [CaseController::class, 'search1'])->name('cases.search1');
 Route::get('finalprint/{id}', [welcome::class, 'finalprint']);
-Route::resource('products', ProductController::class);
 Route::resource('cases', CaseController::class);
 Route::resource('cats', CourtController::class);
 Route::resource('judges', JudgeController::class);
@@ -86,7 +83,6 @@ Route::group(['middleware' =>  ['role:admin', 'auth', ]], function() {
  
    
 });
-Route::resource('ajaxproducts', ProductAjaxController::class);
 Route::get('/students', [PrintController::class, 'index']);
 Route::get('/prnpriview', [PrintController::class, 'prnpriview']);
 

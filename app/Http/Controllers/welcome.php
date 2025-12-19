@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cases;
 use App\Models\Court;
-use App\Models\Type;
 use Auth;
 use Log;
 use DataTables;
@@ -19,7 +18,6 @@ class welcome extends Controller
         $courts = Court::all();
       
         $products = Cases::all();
-        $types = Type::all();
         
    
         if ($request->ajax()) {
@@ -44,7 +42,7 @@ return  $row->cname($row->court_id);
                     ->make(true);
         }
       
-        return view('cases',compact('products','courts','types'));
+        return view('cases',compact('products','courts'));
 
    
 }

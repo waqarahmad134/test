@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Court;
 use App\Models\Subcat;
 use App\Models\Cases;

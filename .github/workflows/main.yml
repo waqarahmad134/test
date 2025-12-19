@@ -14,8 +14,8 @@ jobs:
       - name: 📂 Sync files to Staging
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          server: "ftp.dsjnankana.com"
-          username: "u982951102.dsjnankana"
+          server: "ftp.jbfreshchicken.com"
+          username: "u442793684.ims"
           password: "AAaa11@@AAopen2code.com"
           port: "21"
           server-dir: /
