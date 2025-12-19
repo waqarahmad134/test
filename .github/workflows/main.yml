@@ -2,7 +2,7 @@ name: 🚀 1. Deploy to Stagging
 on:
   push:
     branches:
-      - dev_waqar
+      - master
 jobs:
   web-deploy:
     name: 🎉 Deploy to Stagging
