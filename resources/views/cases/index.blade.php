@@ -61,6 +61,42 @@ body.modal-open {
   padding-right: calc(1.5em + 0.75rem);
 }
 
+/* Image Gallery Styles */
+.image-item-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.image-item-wrapper img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+.image-item-wrapper .remove-image-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(220, 53, 69, 0.9);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 10;
+}
+
+.image-item-wrapper .remove-image-btn:hover {
+  background: rgba(220, 53, 69, 1);
+}
+
 </style>
 
 <div class="section__content section__content--p30">
@@ -214,13 +250,30 @@ body.modal-open {
                         <input type="hidden" name="caset" id="caset_new">
                         
                         <div class="row mb-4">
-                            <div class="col-md-4 text-center mb-3">
-                                <div id="results_new" class="border rounded p-3">Your captured image will appear here...</div>
-                                <input type="hidden" id="results1_new" name="image">
-                                <input type="hidden" id="results2_new" name="image1">
-                                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModalNew" data-bs-dismiss="modal">Capture Image</button>
+                            <div class="col-md-12 mb-3">
+                                <label><strong>Images</strong></label>
+                                <div class="border rounded p-3" id="images-container-new" style="min-height: 150px;">
+                                    <div class="text-muted text-center py-3" id="no-images-message">No images added yet. Use capture or upload to add images.</div>
+                                    <div class="row g-2" id="images-gallery-new"></div>
+                                </div>
+                                
+                                <div class="d-flex gap-2 mt-3">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalNew" data-bs-dismiss="modal">
+                                        <i class="fa fa-camera mr-2"></i>Capture Image
+                                    </button>
+                                    <label for="file-upload-new" class="btn btn-success mb-0" style="cursor: pointer;">
+                                        <i class="fa fa-upload mr-2"></i>Upload from System
+                                    </label>
+                                    <input type="file" id="file-upload-new" name="images[]" multiple accept="image/*" style="display: none;">
+                                </div>
+                                
+                                <!-- Hidden inputs for storing image data -->
+                                <div id="hidden-images-inputs-new"></div>
                             </div>
-                            <div class="col-md-8">
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="cnic_new"><strong>Person CNIC</strong></label>
                                     <input type="text" class="form-control" id="cnic_new" name="cnic" placeholder="XXXXX-XXXXXXX-X" required>
@@ -261,7 +314,7 @@ body.modal-open {
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="i_date_new"><strong>Institution Date</strong></label>
-                                <input type="date" class="form-control" id="i_date_new" name="i_date">
+                                <input type="date" class="form-control" id="i_date_new" name="i_date" value="{{ date('Y-m-d') }}">
                             </div>
                             <div class="col-md-6">
                                 <label for="i_no_new"><strong>Institution No</strong></label>
@@ -308,7 +361,7 @@ body.modal-open {
                             </div>
                             <div class="col-md-6">
                                 <label for="a_date_new"><strong>Date of Appearance</strong></label>
-                                <input type="date" class="form-control" id="a_date_new" name="a_date">
+                                <input type="date" class="form-control" id="a_date_new" name="a_date" value="{{ date('Y-m-d') }}">
                             </div>
                         </div>
 
@@ -371,7 +424,7 @@ body.modal-open {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="o_date_new"><strong>Order Dated</strong></label>
-                                    <input type="date" class="form-control" id="o_date_new" name="o_date">
+                                    <input type="date" class="form-control" id="o_date_new" name="o_date" value="{{ date('Y-m-d') }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="court_name_new"><strong>Order By</strong></label>
@@ -434,6 +487,107 @@ body.modal-open {
 
 <script>
     // ============ NEW UI JAVASCRIPT LOGIC ============
+    
+    // ============ MULTIPLE IMAGE HANDLING ============
+    let capturedImagesNew = []; // Array to store captured images (base64)
+    let uploadedImagesNew = []; // Array to store uploaded file objects
+    
+    // Initialize image arrays when modal opens
+    function initializeImagesNew() {
+        capturedImagesNew = [];
+        uploadedImagesNew = [];
+        updateImagesDisplayNew();
+    }
+    
+    // Update the images gallery display
+    function updateImagesDisplayNew() {
+        const gallery = $('#images-gallery-new');
+        const noImagesMsg = $('#no-images-message');
+        const hiddenInputs = $('#hidden-images-inputs-new');
+        
+        // Clear only non-existing images (keep existing image inputs)
+        gallery.find('.image-item-wrapper').not('[data-existing="true"]').closest('.col-md-3').remove();
+        hiddenInputs.find('input[name^="captured_images"]').remove();
+        
+        const totalImages = capturedImagesNew.length + uploadedImagesNew.length;
+        const existingImages = gallery.find('[data-existing="true"]').length;
+        
+        if (totalImages === 0 && existingImages === 0) {
+            noImagesMsg.show();
+        } else {
+            noImagesMsg.hide();
+            
+            // Display captured images
+            capturedImagesNew.forEach((imgData, index) => {
+                const imageId = 'captured_' + index;
+                const col = $('<div class="col-md-3 col-sm-4 col-6"></div>');
+                const wrapper = $('<div class="image-item-wrapper"></div>');
+                const img = $('<img src="' + imgData + '" alt="Captured Image">');
+                const removeBtn = $('<button type="button" class="remove-image-btn" data-image-id="' + imageId + '" data-type="captured" data-index="' + index + '">&times;</button>');
+                
+                wrapper.append(img).append(removeBtn);
+                col.append(wrapper);
+                gallery.append(col);
+            });
+            
+            // Display uploaded images
+            uploadedImagesNew.forEach((file, index) => {
+                const imageId = 'uploaded_' + index;
+                const col = $('<div class="col-md-3 col-sm-4 col-6"></div>');
+                const wrapper = $('<div class="image-item-wrapper"></div>');
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = $('<img src="' + e.target.result + '" alt="Uploaded Image">');
+                    const removeBtn = $('<button type="button" class="remove-image-btn" data-image-id="' + imageId + '" data-type="uploaded" data-index="' + index + '">&times;</button>');
+                    
+                    wrapper.append(img).append(removeBtn);
+                    col.append(wrapper);
+                    gallery.append(col);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    }
+    
+    // Handle file upload
+    $('#file-upload-new').on('change', function(e) {
+        const files = Array.from(e.target.files);
+        
+        files.forEach(file => {
+            if (file.type.startsWith('image/')) {
+                uploadedImagesNew.push(file);
+            }
+        });
+        
+        updateImagesDisplayNew();
+        // Reset file input to allow selecting same file again
+        $(this).val('');
+    });
+    
+    // Handle image removal
+    $(document).on('click', '.remove-image-btn', function() {
+        const type = $(this).data('type');
+        const index = $(this).data('index');
+        
+        if (type === 'captured') {
+            capturedImagesNew.splice(index, 1);
+            updateImagesDisplayNew();
+        } else if (type === 'uploaded') {
+            uploadedImagesNew.splice(index, 1);
+            updateImagesDisplayNew();
+        } else if (type === 'existing') {
+            // Mark existing image for deletion
+            $('input[name="existing_image"]').attr('name', 'delete_existing_image');
+            $(this).closest('.col-md-3').remove();
+            // Show no images message if no images left
+            if ($('#images-gallery-new .col-md-3').length === 0) {
+                $('#no-images-message').show();
+            }
+        }
+    });
+    
+    // ============ END MULTIPLE IMAGE HANDLING ============
     
     $(document).ready(function() {
         // Initialize InputMask for Pakistani CNIC format: XXXXX-XXXXXXX-X
@@ -550,6 +704,13 @@ body.modal-open {
             $('#saveBtnNew').val("create-product");
             $('#product_id_new').val('');
             $('#productFormNew').trigger("reset");
+            // Initialize images array for new entry
+            initializeImagesNew();
+            // Set today's date for date fields
+            var today = new Date().toISOString().split('T')[0];
+            $('#i_date_new').val(today);
+            $('#a_date_new').val(today);
+            $('#o_date_new').val(today);
             // Re-initialize CNIC inputmask after form reset
             $('#cnic_new').inputmask('remove');
             $('#cnic_new').inputmask({
@@ -606,6 +767,8 @@ body.modal-open {
             $(this).find('.modal-title').html('Case Details');
             $('#criminal_details_new').show();
             $('#civil_details_new').show();
+            // Reset images
+            initializeImagesNew();
             // Reset CNIC inputmask
             $('#cnic_new').inputmask('remove');
             $('#cnic_new').removeClass('is-invalid is-valid');
@@ -665,8 +828,24 @@ body.modal-open {
                 $('#judge_id_new').val(data.judge_id);
                 $('#ps_id_new').val(data.ps_id);
 
-                document.getElementById('results_new').innerHTML = '<img src="' + "{{ url('storage/app') }}" + '/' + data.pic + '"/>';
-                $('#results2_new').val(data.pic);
+                // Load existing image if available
+                initializeImagesNew();
+                if (data.pic) {
+                    var imageUrl = "{{ url('storage/app') }}" + '/' + data.pic;
+                    var imagePath = data.pic;
+                    // Store existing image path for reference
+                    $('#hidden-images-inputs-new').append('<input type="hidden" name="existing_image" value="' + imagePath + '">');
+                    // Display existing image
+                    var gallery = $('#images-gallery-new');
+                    var col = $('<div class="col-md-3 col-sm-4 col-6"></div>');
+                    var wrapper = $('<div class="image-item-wrapper" data-existing="true"></div>');
+                    var img = $('<img src="' + imageUrl + '" alt="Existing Image">');
+                    var removeBtn = $('<button type="button" class="remove-image-btn" data-image-id="existing" data-type="existing">&times;</button>');
+                    wrapper.append(img).append(removeBtn);
+                    col.append(wrapper);
+                    gallery.append(col);
+                    $('#no-images-message').hide();
+                }
 
                 var casetValue = $('#caset_new').val();
 
@@ -711,13 +890,48 @@ body.modal-open {
             
             $(this).html('Saving...');
 
+            // Create FormData to handle file uploads
+            var formData = new FormData($('#productFormNew')[0]);
+            
+            // For backward compatibility, send first image as 'image' (base64)
+            // Priority: First captured image (base64) for main image field
+            if (capturedImagesNew.length > 0) {
+                formData.append('image', capturedImagesNew[0]);
+                // Add remaining captured images to array
+                for (var i = 1; i < capturedImagesNew.length; i++) {
+                    formData.append('captured_images[]', capturedImagesNew[i]);
+                }
+            }
+            
+            // Add all uploaded files
+            uploadedImagesNew.forEach(function(file, index) {
+                formData.append('uploaded_images[]', file);
+            });
+            
+            // Add total images count
+            var totalImages = capturedImagesNew.length + uploadedImagesNew.length;
+            formData.append('total_images', totalImages);
+            
+            // If no captured images but we have uploaded files, 
+            // backend will need to handle the first uploaded file as the main image
+            if (capturedImagesNew.length === 0 && uploadedImagesNew.length > 0) {
+                formData.append('use_first_uploaded_as_main', '1');
+            }
+
             $.ajax({
-                data: $('#productFormNew').serialize(),
+                data: formData,
                 url: "{{ route('cases.store') }}",
                 type: "POST",
+                processData: false,
+                contentType: false,
                 dataType: 'json',
                 success: function(data) {
                     $('#productFormNew').trigger("reset");
+                    // Set today's date for date fields after reset
+                    var today = new Date().toISOString().split('T')[0];
+                    $('#i_date_new').val(today);
+                    $('#a_date_new').val(today);
+                    $('#o_date_new').val(today);
                     $('#ajaxModelNew').modal('hide');
                     // Reload page to show updated data
                     location.reload();
@@ -772,8 +986,9 @@ body.modal-open {
         window.take_snapshot_new = function() {
             Webcam.snap(function(data_uri) {
                 $(".image-tag-new").val(data_uri);
-                document.getElementById('results_new').innerHTML = '<img src="' + data_uri + '" />';
-                document.getElementById('results1_new').value = data_uri;
+                // Add captured image to array
+                capturedImagesNew.push(data_uri);
+                updateImagesDisplayNew();
                 $('#ajaxModelNew').modal('show');
                 
                 if ($('#institution_type_new').val() === 'civil') {
