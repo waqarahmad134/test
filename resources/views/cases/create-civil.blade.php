@@ -10,26 +10,71 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.min.js"></script>
 
     <style>
-        /* CNIC Validation Styles */
+        /* Form Styles */
+        .form-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            margin-top: 10px;
+        }
+
+        .section-title h5 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .section-title.secondary {
+            background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+        }
+
+        .section-title.tertiary {
+            background: linear-gradient(135deg, #fd7e14 0%, #ffc107 100%);
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            padding: 0.5rem 0.75rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+        /* CNIC Validation */
         #cnic.is-invalid {
             border-color: #dc3545;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 3.6 .4.4.4-.4m0 4.8-.4-.4-.4.4'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right calc(0.375em + 0.1875rem) center;
-            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-            padding-right: calc(1.5em + 0.75rem);
         }
 
         #cnic.is-valid {
             border-color: #198754;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='m2.3 6.73.98-.98 1.4 1.4 3.1-3.1.98.98-4.08 4.08z'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right calc(0.375em + 0.1875rem) center;
-            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-            padding-right: calc(1.5em + 0.75rem);
         }
 
-        /* Image Gallery Styles */
+        /* Image Gallery */
         .image-item-wrapper {
             position: relative;
             margin-bottom: 10px;
@@ -37,9 +82,9 @@
 
         .image-item-wrapper img {
             width: 100%;
-            height: 150px;
+            height: 120px;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 6px;
             border: 1px solid #dee2e6;
         }
 
@@ -51,37 +96,52 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
             z-index: 10;
         }
 
-        .image-item-wrapper .remove-image-btn:hover {
-            background: rgba(220, 53, 69, 1);
+        /* Checkbox styling */
+        .form-check-inline {
+            margin-right: 1.5rem;
         }
 
-        .form-card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        .form-check-input:checked {
+            background-color: #28a745;
+            border-color: #28a745;
         }
 
-        .section-title {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        /* Input Group */
+        .input-group-text {
+            background: #e9ecef;
+            font-weight: 600;
+        }
+
+        .case-title-separator {
+            background: linear-gradient(135deg, #28a745, #20c997);
             color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
         }
 
-        .camera-box {
-            background: #f8f9fa;
-            border-radius: 8px;
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-group {
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        .back-btn {
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-3px);
         }
     </style>
 
@@ -93,9 +153,9 @@
                         <span class="badge bg-success me-2">Civil/Family</span>
                         Create New Institution
                     </h4>
-                    <p class="text-muted mb-0">Fill in the details below to create a new Civil/Family case</p>
+                    <p class="text-muted mb-0">Fill in all the required details to create a new Civil/Family case</p>
                 </div>
-                <a href="{{ route('cases.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('cases.index') }}" class="btn btn-outline-secondary back-btn">
                     <iconify-icon icon="mdi:arrow-left" class="me-1"></iconify-icon>
                     Back to List
                 </a>
@@ -109,267 +169,552 @@
                 @csrf
                 <input type="hidden" name="caset" id="caset" value="Civil/Family Case">
 
-                <!-- Basic Info Section -->
+                <!-- ==================== SECTION 1: BASIC DETAILS ==================== -->
                 <div class="section-title">
-                    <h5 class="mb-0"><iconify-icon icon="mdi:information-outline" class="me-2"></iconify-icon>Basic
-                        Information</h5>
+                    <h5><iconify-icon icon="mdi:information-outline" class="me-2"></iconify-icon>Basic Details</h5>
                 </div>
 
-                <!-- Images Section -->
+                <!-- Images Row -->
                 <div class="row mb-4">
-                    <div class="col-md-12">
-                        <label><strong>Images</strong></label>
-                        <div class="border rounded p-3" id="images-container" style="min-height: 150px;">
-                            <div class="text-muted text-center py-3" id="no-images-message">No images added yet. Use capture
-                                or upload to add images.</div>
-                            <div class="row g-2" id="images-gallery"></div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label><iconify-icon icon="mdi:image-multiple" class="me-1"></iconify-icon>Images</label>
+                            <div class="border rounded p-3 bg-light" id="images-container" style="min-height: 100px;">
+                                <div class="text-muted text-center py-2" id="no-images-message">
+                                    <iconify-icon icon="mdi:image-off" style="font-size: 24px;"></iconify-icon>
+                                    <p class="mb-0 mt-1">No images added yet. Use capture or upload to add images.</p>
+                                </div>
+                                <div class="row g-2" id="images-gallery"></div>
+                            </div>
+                            <div class="d-flex gap-2 mt-2">
+                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#cameraModal">
+                                    <iconify-icon icon="mdi:camera" class="me-1"></iconify-icon>Capture
+                                </button>
+                                <label for="file-upload" class="btn btn-outline-success btn-sm mb-0"
+                                    style="cursor: pointer;">
+                                    <iconify-icon icon="mdi:upload" class="me-1"></iconify-icon>Upload
+                                </label>
+                                <input type="file" id="file-upload" name="images[]" multiple accept="image/*"
+                                    style="display: none;">
+                            </div>
+                            <div id="hidden-images-inputs"></div>
                         </div>
-
-                        <div class="d-flex gap-2 mt-3">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#cameraModal">
-                                <iconify-icon icon="mdi:camera" class="me-1"></iconify-icon>Capture Image
-                            </button>
-                            <label for="file-upload" class="btn btn-success mb-0" style="cursor: pointer;">
-                                <iconify-icon icon="mdi:upload" class="me-1"></iconify-icon>Upload from System
-                            </label>
-                            <input type="file" id="file-upload" name="images[]" multiple accept="image/*"
-                                style="display: none;">
-                        </div>
-
-                        <div id="hidden-images-inputs"></div>
                     </div>
                 </div>
 
-                <!-- CNIC -->
-                <div class="row mb-4">
+                <!-- Judge/Assigned To Row -->
+                <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="cnic"><strong>Person CNIC</strong></label>
-                            <input type="text" class="form-control" id="cnic" name="cnic" placeholder="XXXXX-XXXXXXX-X"
-                                required>
+                            <label for="judge_id"><iconify-icon icon="mdi:account-tie" class="me-1"></iconify-icon>Assigned
+                                To / Judge Name <span class="text-danger">*</span></label>
+                            <select class="form-control" id="judge_id" name="judge_id" required>
+                                <option value="">Select Judge/Officer</option>
+                                @foreach($judges as $s)
+                                    <option value="{{$s->id}}">{{$s->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Title Row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label><iconify-icon icon="mdi:format-title" class="me-1"></iconify-icon>Case Title <span
+                                    class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="p1" name="p1"
+                                    placeholder="Party 1 (Plaintiff/Petitioner)" required>
+                                <span class="input-group-text case-title-separator">VS</span>
+                                <input type="text" class="form-control" id="p2" name="p2"
+                                    placeholder="Party 2 (Defendant/Respondent)" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CNIC Row -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cnic"><iconify-icon icon="mdi:card-account-details"
+                                    class="me-1"></iconify-icon>Person CNIC</label>
+                            <input type="text" class="form-control" id="cnic" name="cnic" placeholder="XXXXX-XXXXXXX-X">
                             <small class="form-text text-danger" id="cnic_error" style="display: none;">Please enter a valid
                                 Pakistani CNIC format (XXXXX-XXXXXXX-X)</small>
                             <a href="#" onclick="sendvalue(event)" target="_blank">
-                                <small class="form-text text-danger" id="check_cnic">CNIC already exists</small>
+                                <small class="form-text text-danger" id="check_cnic" style="display: none;">CNIC already
+                                    exists - Click to view</small>
                             </a>
                         </div>
                     </div>
-                </div>
-
-                <!-- Party Names -->
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="p1"><strong>Party1</strong></label>
-                            <input type="text" class="form-control" id="p1" name="p1">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="p2"><strong>Party2</strong></label>
-                            <input type="text" class="form-control" id="p2" name="p2">
+                            <label for="cno"><iconify-icon icon="mdi:door" class="me-1"></iconify-icon>Court Room
+                                No.</label>
+                            <input type="text" class="form-control" id="cno" name="cno"
+                                placeholder="Enter court room number">
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Numbers -->
-                <div class="row mb-3">
+                <!-- Contact Numbers Row -->
+                <div class="row">
                     <div class="col-md-6">
-                        <label for="m1"><strong>Party1 Contact No</strong></label>
-                        <input type="text" class="form-control" id="m1" name="m1">
+                        <div class="form-group">
+                            <label for="m1"><iconify-icon icon="mdi:phone" class="me-1"></iconify-icon>Party 1 Contact
+                                No</label>
+                            <input type="text" class="form-control" id="m1" name="m1" placeholder="03XX-XXXXXXX">
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="m2"><strong>Party2 Contact No</strong></label>
-                        <input type="text" class="form-control" id="m2" name="m2">
-                    </div>
-                </div>
-
-                <!-- Institution Details -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="i_date"><strong>Institution Date</strong></label>
-                        <input type="date" class="form-control" id="i_date" name="i_date" value="{{ date('Y-m-d') }}">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="i_no"><strong>Institution No</strong></label>
-                        <input type="text" class="form-control" id="i_no" name="i_no">
-                        <small class="form-text text-danger" id="check_fir">Case already entered 4 times</small>
+                        <div class="form-group">
+                            <label for="m2"><iconify-icon icon="mdi:phone" class="me-1"></iconify-icon>Party 2 Contact
+                                No</label>
+                            <input type="text" class="form-control" id="m2" name="m2" placeholder="03XX-XXXXXXX">
+                        </div>
                     </div>
                 </div>
 
-                <!-- Category & Subcategory -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="cat"><strong>Category</strong></label>
-                        <select class="form-control" id="cat" name="cat" onchange="changeCategory();">
-                            <option value="">Select:</option>
-                            @foreach($cats as $s)
-                                <option value="{{$s->id}}">{{$s->name}}</option>
-                            @endforeach
-                        </select>
+                <!-- Institution Details Row -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="i_date"><iconify-icon icon="mdi:calendar" class="me-1"></iconify-icon>Institution
+                                Date <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="i_date" name="i_date" value="{{ date('Y-m-d') }}"
+                                required>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="subcat"><strong>Subcategory</strong></label>
-                        <select class="form-control" id="subcat" name="subcat" disabled>
-                            <option value="">Select:</option>
-                            @foreach($subcats as $s)
-                                <option value="{{$s->id}}" class="subcat-option" data-cat-id="{{$s->cat_id}}">{{$s->name}}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="i_no"><iconify-icon icon="mdi:numeric" class="me-1"></iconify-icon>Institution No
+                                <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="i_no" name="i_no" placeholder="Enter Inst. No"
+                                required>
+                            <small class="form-text text-danger" id="check_fir" style="display: none;">Case already entered
+                                multiple times</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="case_no"><iconify-icon icon="mdi:file-document" class="me-1"></iconify-icon>Case No.
+                                (Court)</label>
+                            <input type="text" class="form-control" id="case_no" name="case_no" placeholder="Case No.">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="a_date"><iconify-icon icon="mdi:calendar-check"
+                                    class="me-1"></iconify-icon>Court/Appearance Date <span
+                                    class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="a_date" name="a_date" value="{{ date('Y-m-d') }}"
+                                required>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Assigned To -->
-                <div class="form-group mb-4">
-                    <label for="judge_id"><strong>Assigned To</strong></label>
-                    <select class="form-control" id="judge_id" name="judge_id">
-                        <option value="">Select:</option>
-                        @foreach($judges as $s)
-                            <option value="{{$s->id}}">{{$s->name}}</option>
-                        @endforeach
-                    </select>
+                <!-- Category Row -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="cat"><iconify-icon icon="mdi:folder" class="me-1"></iconify-icon>Category <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-control" id="cat" name="cat" onchange="changeCategory();" required>
+                                <option value="">Select Category</option>
+                                @foreach($cats as $s)
+                                    <option value="{{$s->id}}">{{$s->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="subcat"><iconify-icon icon="mdi:folder-open" class="me-1"></iconify-icon>Subcategory
+                                <span class="text-danger">*</span></label>
+                            <select class="form-control" id="subcat" name="subcat" disabled required>
+                                <option value="">Select Subcategory</option>
+                                @foreach($subcats as $s)
+                                    <option value="{{$s->id}}" class="subcat-option" data-cat-id="{{$s->cat_id}}">{{$s->name}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="govt_dept"><iconify-icon icon="mdi:domain" class="me-1"></iconify-icon>Govt.
+                                Department (If applicable)</label>
+                            <select class="form-control" id="govt_dept" name="govt_dept">
+                                <option value="">Nil / Not Applicable</option>
+                                <option value="Board of Revenue">Board of Revenue</option>
+                                <option value="Education Department">Education Department</option>
+                                <option value="Health Department">Health Department</option>
+                                <option value="Police Department">Police Department</option>
+                                <option value="Metropolitan Corporation">Metropolitan Corporation</option>
+                                <option value="WAPDA">WAPDA</option>
+                                <option value="WASA">WASA</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Court Details -->
-                <div class="row mb-3">
+                <!-- Direction Details Row -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="direction_from"><iconify-icon icon="mdi:arrow-right-bold"
+                                    class="me-1"></iconify-icon>Direction Issued From</label>
+                            <select class="form-control" id="direction_from" name="direction_from">
+                                <option value="">No Direction</option>
+                                <option value="Supreme Court">Supreme Court</option>
+                                <option value="High Court">Lahore High Court</option>
+                                <option value="D&SJ">District & Sessions Judge</option>
+                                <option value="NJP">National Judicial Policy (NJP)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="direction_detail"><iconify-icon icon="mdi:note-text"
+                                    class="me-1"></iconify-icon>Direction (Letter No. & Dated)</label>
+                            <input type="text" class="form-control" id="direction_detail" name="direction_detail"
+                                placeholder="Enter direction details">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="direction_end_date"><iconify-icon icon="mdi:calendar-end"
+                                    class="me-1"></iconify-icon>Direction End Date</label>
+                            <input type="date" class="form-control" id="direction_end_date" name="direction_end_date">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- This Case Includes Row -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><iconify-icon icon="mdi:checkbox-multiple-marked" class="me-1"></iconify-icon>This case
+                                includes:</label>
+                            <div class="d-flex flex-wrap gap-3 mt-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_juvenile" id="is_juvenile"
+                                        value="1">
+                                    <label class="form-check-label" for="is_juvenile">Juvenile</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_overseas" id="is_overseas"
+                                        value="1">
+                                    <label class="form-check-label" for="is_overseas">Overseas</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><iconify-icon icon="mdi:human-female" class="me-1"></iconify-icon>This case includes
+                                Women:</label>
+                            <div class="d-flex flex-wrap gap-3 mt-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_women_petitioner"
+                                        id="is_women_petitioner" value="1">
+                                    <label class="form-check-label" for="is_women_petitioner">Petitioner/Plaintiff</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="is_women_respondent"
+                                        id="is_women_respondent" value="1">
+                                    <label class="form-check-label" for="is_women_respondent">Respondent/Defendant</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="connected_case"><iconify-icon icon="mdi:link-variant"
+                                    class="me-1"></iconify-icon>Connected Case (Main Case)</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" id="is_connected"
+                                        name="is_connected" value="1">
+                                </div>
+                                <input type="text" class="form-control" id="connected_case" name="connected_case"
+                                    placeholder="Case connected with" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mouza and Suit Valuation Row -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="mouza"><iconify-icon icon="mdi:map-marker" class="me-1"></iconify-icon>Mouza
+                                (Area)</label>
+                            <input type="text" class="form-control" id="mouza" name="mouza" placeholder="Enter Mouza/Area">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="suit_valuation"><iconify-icon icon="mdi:currency-usd"
+                                    class="me-1"></iconify-icon>Suit Valuation</label>
+                            <input type="number" class="form-control" id="suit_valuation" name="suit_valuation"
+                                placeholder="Enter suit valuation amount">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="civil_jurisdiction"><iconify-icon icon="mdi:scale-balance"
+                                    class="me-1"></iconify-icon>Civil Jurisdiction</label>
+                            <select class="form-control" id="civil_jurisdiction" name="civil_jurisdiction">
+                                <option value="">Select Civil Jurisdiction</option>
+                                <option value="Class-I">Class-I</option>
+                                <option value="Class-II">Class-II</option>
+                                <option value="Class-III">Class-III</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Remarks Row -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="remarks"><iconify-icon icon="mdi:note-edit"
+                                    class="me-1"></iconify-icon>Remarks</label>
+                            <textarea class="form-control" id="remarks" name="remarks" rows="3"
+                                placeholder="Enter any additional remarks or notes about this case..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== SECTION 2: CIVIL DETAILS (Appellate) ==================== -->
+                <div class="section-title secondary">
+                    <h5><iconify-icon icon="mdi:gavel" class="me-2"></iconify-icon>Appellate Jurisdiction Details (If
+                        applicable)</h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="lower_court_case_no"><iconify-icon icon="mdi:file-document-outline"
+                                    class="me-1"></iconify-icon>Case No. (Lower Court)</label>
+                            <input type="text" class="form-control" id="lower_court_case_no" name="lower_court_case_no"
+                                placeholder="Lower court case no.">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="app_against"><iconify-icon icon="mdi:arrow-up-bold"
+                                    class="me-1"></iconify-icon>Appeal Against</label>
+                            <select class="form-control" id="app_against" name="app_against">
+                                <option value="">Select</option>
+                                <option value="Interim Order">Interim Order</option>
+                                <option value="Final Order">Final Order</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="o_date"><iconify-icon icon="mdi:calendar" class="me-1"></iconify-icon>Order
+                                Dated</label>
+                            <input type="date" class="form-control" id="o_date" name="o_date">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="court_name"><iconify-icon icon="mdi:account-check" class="me-1"></iconify-icon>Order
+                                By</label>
+                            <input type="text" class="form-control" id="court_name" name="court_name"
+                                placeholder="Name of officer/court">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="stay_granted"><iconify-icon icon="mdi:hand-back-left"
+                                    class="me-1"></iconify-icon>Stay Granted</label>
+                            <select class="form-control" id="stay_granted" name="stay_granted">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== SECTION 3: CASE PROCEEDINGS ==================== -->
+                <div class="section-title tertiary">
+                    <h5><iconify-icon icon="mdi:progress-clock" class="me-2"></iconify-icon>Case Proceedings</h5>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="case_status"><iconify-icon icon="mdi:flag" class="me-1"></iconify-icon>Case
+                                Status</label>
+                            <select class="form-control" id="case_status" name="case_status">
+                                <option value="Pending" selected>Pending</option>
+                                <option value="Decided">Decided</option>
+                                <option value="Disposed">Disposed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="next_date"><iconify-icon icon="mdi:calendar-arrow-right"
+                                    class="me-1"></iconify-icon>Next Date</label>
+                            <input type="date" class="form-control" id="next_date" name="next_date">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="case_stage"><iconify-icon icon="mdi:stairs" class="me-1"></iconify-icon>Case
+                                Stage</label>
+                            <select class="form-control" id="case_stage" name="case_stage">
+                                <option value="">Select Case Stage</option>
+                                <option value="Notice">Notice</option>
+                                <option value="Summon">Summon</option>
+                                <option value="Written Statement">Written Statement</option>
+                                <option value="Pre-Trial Reconciliation">Pre-Trial Reconciliation</option>
+                                <option value="Evidence of Plaintiff">Evidence of Plaintiff</option>
+                                <option value="Evidence of Defendant">Evidence of Defendant</option>
+                                <option value="Cross Examination">Cross Examination</option>
+                                <option value="Arguments">Arguments</option>
+                                <option value="Final Arguments">Final Arguments</option>
+                                <option value="For Order">For Order</option>
+                                <option value="Compromise">Compromise</option>
+                                <option value="Further Proceedings">Further Proceedings</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-6">
-                        <label for="cno"><strong>Court Room No.</strong></label>
-                        <input type="text" class="form-control" id="cno" name="cno">
+                        <div class="form-group">
+                            <label for="adjournment_reason"><iconify-icon icon="mdi:clock-alert"
+                                    class="me-1"></iconify-icon>Adjournment Reason</label>
+                            <select class="form-control" id="adjournment_reason" name="adjournment_reason">
+                                <option value="">Nil</option>
+                                <option value="On Request of Plaintiff Party">On Request of Plaintiff Party</option>
+                                <option value="On Request of Defendant Party">On Request of Defendant Party</option>
+                                <option value="On Request of Both Parties">On Request of Both Parties</option>
+                                <option value="Non Availability of Counsel">Non Availability of Counsel</option>
+                                <option value="Non Availability of Record">Non Availability of Record</option>
+                                <option value="Non Deposit of Court Fee">Non Deposit of Court Fee</option>
+                                <option value="Strike of Bar">Strike of Bar</option>
+                                <option value="Presiding Officer on Leave">Presiding Officer on Leave</option>
+                                <option value="Declared Holiday">Declared Holiday</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="a_date"><strong>Date of Appearance</strong></label>
-                        <input type="date" class="form-control" id="a_date" name="a_date" value="{{ date('Y-m-d') }}">
+                        <div class="form-group">
+                            <label for="short_order"><iconify-icon icon="mdi:message-text" class="me-1"></iconify-icon>Short
+                                Order</label>
+                            <textarea class="form-control" id="short_order" name="short_order" rows="2"
+                                placeholder="Enter short order details..."></textarea>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Form Actions -->
-                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
-                    <a href="{{ route('cases.index') }}" class="btn btn-secondary">
-                        <iconify-icon icon="mdi:close" class="me-1"></iconify-icon>Cancel
-                    </a>
-                    <button type="submit" class="btn btn-success" id="saveBtn">
-                        <iconify-icon icon="mdi:content-save" class="me-1"></iconify-icon>Save Case
-                    </button>
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                    <div class="text-muted">
+                        <small><iconify-icon icon="mdi:information" class="me-1"></iconify-icon>Fields marked with <span
+                                class="text-danger">*</span> are required</small>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('cases.index') }}" class="btn btn-secondary">
+                            <iconify-icon icon="mdi:close" class="me-1"></iconify-icon>Cancel
+                        </a>
+                        <button type="submit" class="btn btn-success" id="saveBtn">
+                            <iconify-icon icon="mdi:content-save" class="me-1"></iconify-icon>Save Case
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Camera Modal -->
-    <div class="modal fade text-center" id="cameraModal" tabindex="-1" aria-labelledby="cameraModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="cameraModal" tabindex="-1">
         <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content border-0 shadow-sm">
-                <div class="modal-header bg-light border-bottom-0">
-                    <h5 class="modal-title mx-auto" id="cameraModalLabel">Capture Image</h5>
-                    <button type="button" class="btn-close position-absolute" style="right: 15px;" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title"><iconify-icon icon="mdi:camera" class="me-2"></iconify-icon>Capture Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body px-4 pt-0">
-                    <div class="camera-box my-3 p-2 border rounded bg-light">
-                        <div id="my_camera" class="w-100 rounded"
-                            style="max-width: 100%; height: auto; aspect-ratio: 4 / 3; overflow: hidden;"></div>
+                <div class="modal-body text-center">
+                    <div class="bg-light rounded p-2 mb-3">
+                        <div id="my_camera" style="width: 100%; aspect-ratio: 4/3;"></div>
                     </div>
                     <input type="hidden" name="image" class="image-tag">
-                    <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-primary px-4" onclick="take_snapshot()"
-                            data-bs-dismiss="modal">
-                            <iconify-icon icon="mdi:camera" class="me-1"></iconify-icon>Take Snapshot
-                        </button>
-                    </div>
+                    <button type="button" class="btn btn-primary" onclick="take_snapshot()" data-bs-dismiss="modal">
+                        <iconify-icon icon="mdi:camera" class="me-1"></iconify-icon>Take Snapshot
+                    </button>
                 </div>
-                <div class="modal-footer border-0"></div>
             </div>
         </div>
     </div>
 
     @push('scripts')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
-
         <script>
-            // Image handling arrays
-            let capturedImages = [];
-            let uploadedImages = [];
-
-            function initializeImages() {
-                capturedImages = [];
-                uploadedImages = [];
-                updateImagesDisplay();
-            }
+            let capturedImages = [], uploadedImages = [];
 
             function updateImagesDisplay() {
                 const gallery = $('#images-gallery');
                 const noImagesMsg = $('#no-images-message');
-
                 gallery.empty();
 
-                const totalImages = capturedImages.length + uploadedImages.length;
-
-                if (totalImages === 0) {
+                if (capturedImages.length + uploadedImages.length === 0) {
                     noImagesMsg.show();
                 } else {
                     noImagesMsg.hide();
-
-                    // Display captured images
                     capturedImages.forEach((imgData, index) => {
-                        const col = $('<div class="col-md-3 col-sm-4 col-6"></div>');
-                        const wrapper = $('<div class="image-item-wrapper"></div>');
-                        const img = $('<img src="' + imgData + '" alt="Captured Image">');
-                        const removeBtn = $('<button type="button" class="remove-image-btn" data-type="captured" data-index="' + index + '">&times;</button>');
-
-                        wrapper.append(img).append(removeBtn);
-                        col.append(wrapper);
-                        gallery.append(col);
+                        gallery.append('<div class="col-md-2 col-sm-3 col-4"><div class="image-item-wrapper"><img src="' + imgData + '"><button type="button" class="remove-image-btn" data-type="captured" data-index="' + index + '">&times;</button></div></div>');
                     });
-
-                    // Display uploaded images
                     uploadedImages.forEach((file, index) => {
-                        const col = $('<div class="col-md-3 col-sm-4 col-6"></div>');
-                        const wrapper = $('<div class="image-item-wrapper"></div>');
-
                         const reader = new FileReader();
                         reader.onload = function (e) {
-                            const img = $('<img src="' + e.target.result + '" alt="Uploaded Image">');
-                            const removeBtn = $('<button type="button" class="remove-image-btn" data-type="uploaded" data-index="' + index + '">&times;</button>');
-
-                            wrapper.append(img).append(removeBtn);
-                            col.append(wrapper);
-                            gallery.append(col);
+                            gallery.append('<div class="col-md-2 col-sm-3 col-4"><div class="image-item-wrapper"><img src="' + e.target.result + '"><button type="button" class="remove-image-btn" data-type="uploaded" data-index="' + index + '">&times;</button></div></div>');
                         };
                         reader.readAsDataURL(file);
                     });
                 }
             }
 
-            // Handle file upload
             $('#file-upload').on('change', function (e) {
-                const files = Array.from(e.target.files);
-                files.forEach(file => {
-                    if (file.type.startsWith('image/')) {
-                        uploadedImages.push(file);
-                    }
+                Array.from(e.target.files).forEach(file => {
+                    if (file.type.startsWith('image/')) uploadedImages.push(file);
                 });
                 updateImagesDisplay();
                 $(this).val('');
             });
 
-            // Handle image removal
             $(document).on('click', '.remove-image-btn', function () {
-                const type = $(this).data('type');
-                const index = $(this).data('index');
-
-                if (type === 'captured') {
-                    capturedImages.splice(index, 1);
-                } else if (type === 'uploaded') {
-                    uploadedImages.splice(index, 1);
-                }
+                const type = $(this).data('type'), index = $(this).data('index');
+                if (type === 'captured') capturedImages.splice(index, 1);
+                else uploadedImages.splice(index, 1);
                 updateImagesDisplay();
             });
 
+            // Connected case checkbox toggle
+            $('#is_connected').on('change', function () {
+                $('#connected_case').prop('disabled', !this.checked);
+                if (!this.checked) $('#connected_case').val('');
+            });
+
             $(document).ready(function () {
-                // Initialize InputMask for CNIC
+                // CNIC Input Mask
                 $('#cnic').inputmask({
                     mask: '99999-9999999-9',
                     placeholder: 'XXXXX-XXXXXXX-X',
@@ -381,97 +726,71 @@
                 var cnicPattern = /^\d{5}-\d{7}-\d{1}$/;
 
                 function validateCNIC() {
-                    var cnicValue = $('#cnic').inputmask('unmaskedvalue');
-                    var cnicDisplayValue = $('#cnic').val();
-                    var cnicError = $('#cnic_error');
-                    var cnicInput = $('#cnic');
-
-                    if (cnicDisplayValue === '' || cnicValue === '') {
-                        cnicError.hide();
-                        cnicInput.removeClass('is-invalid is-valid');
-                        return false;
+                    var v = $('#cnic').inputmask('unmaskedvalue'), d = $('#cnic').val();
+                    if (d === '' || d === '_____-_______-_') {
+                        $('#cnic_error').hide();
+                        $('#cnic').removeClass('is-invalid is-valid');
+                        return true; // Allow empty
                     }
-
-                    if (cnicValue.length === 13 && cnicPattern.test(cnicDisplayValue)) {
-                        cnicError.hide();
-                        cnicInput.removeClass('is-invalid').addClass('is-valid');
+                    if (v.length === 13 && cnicPattern.test(d)) {
+                        $('#cnic_error').hide();
+                        $('#cnic').removeClass('is-invalid').addClass('is-valid');
                         return true;
                     } else {
-                        cnicError.show();
-                        cnicInput.removeClass('is-valid').addClass('is-invalid');
+                        $('#cnic_error').show();
+                        $('#cnic').removeClass('is-valid').addClass('is-invalid');
                         return false;
                     }
                 }
 
-                $('#cnic').on('blur', validateCNIC);
-                $('#cnic').on('input', function () {
-                    var cnicValue = $(this).inputmask('unmaskedvalue');
-                    if (cnicValue.length >= 5) {
-                        validateCNIC();
-                    } else {
-                        $('#cnic_error').hide();
-                        $(this).removeClass('is-invalid is-valid');
-                    }
+                $('#cnic').on('blur', validateCNIC).on('input', function () {
+                    if ($(this).inputmask('unmaskedvalue').length >= 5) validateCNIC();
                 });
 
-                // CNIC duplicate check
                 $('#check_cnic').hide();
                 $('#cnic').on('keyup', function () {
                     $('#check_cnic').hide();
-                    var code = $(this).val().trim();
-                    if (code !== '' && code.length === 15 && cnicPattern.test(code)) {
-                        $.get("{{ url('cnic') }}" + '/' + code, function (data) {
-                            if (data == "found") {
-                                $('#check_cnic').show();
-                            }
+                    var c = $(this).val().trim();
+                    if (c.length === 15 && cnicPattern.test(c)) {
+                        $.get("{{ url('cnic') }}/" + c, function (d) {
+                            if (d == "found") $('#check_cnic').show();
                         });
                     }
                 });
 
-                // FIR duplicate check
                 $('#check_fir').hide();
                 $('#i_no').on('keyup', function () {
                     $('#check_fir').hide();
-                    var code = $(this).val();
-                    if (code !== '') {
-                        $.get("{{ url('fir') }}" + '/' + code, function (data) {
-                            if (data == "found") {
-                                $('#check_fir').show();
-                            }
+                    var c = $(this).val();
+                    if (c !== '') {
+                        $.get("{{ url('fir') }}/" + c, function (d) {
+                            if (d == "found") $('#check_fir').show();
                         });
                     }
                 });
 
-                // Category change handler
                 window.changeCategory = function () {
-                    var cat = document.getElementById("cat").value;
-                    if (cat == '') {
-                        document.getElementById("subcat").value = '';
-                        document.getElementById("subcat").disabled = true;
+                    var c = $('#cat').val();
+                    if (c == '') {
+                        $('#subcat').val('').prop('disabled', true);
                     } else {
-                        document.getElementById("subcat").disabled = false;
-                        $('#subcat .subcat-option').hide();
-                        $('#subcat .subcat-option[data-cat-id="' + cat + '"]').show();
+                        $('#subcat').prop('disabled', false);
+                        $('#subcat .subcat-option').hide().filter('[data-cat-id="' + c + '"]').show();
+                        $('#subcat').val('');
                     }
-                }
+                };
 
-                // AJAX Setup
                 $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
                 });
 
-                // Form Submit
                 $('#saveBtn').click(function (e) {
                     e.preventDefault();
 
-                    var cnicValue = $('#cnic').val().trim();
-                    if (cnicValue !== '') {
-                        if (!validateCNIC()) {
-                            $('#cnic').focus();
-                            return false;
-                        }
+                    var cv = $('#cnic').val().trim();
+                    if (cv !== '' && cv !== '_____-_______-_' && !validateCNIC()) {
+                        $('#cnic').focus();
+                        return false;
                     }
 
                     var form = document.getElementById('caseForm');
@@ -481,94 +800,71 @@
                     }
 
                     $(this).html('<iconify-icon icon="mdi:loading" class="me-1 spin"></iconify-icon>Saving...');
+                    $(this).prop('disabled', true);
 
-                    var formData = new FormData($('#caseForm')[0]);
+                    var fd = new FormData($('#caseForm')[0]);
 
                     if (capturedImages.length > 0) {
-                        formData.append('image', capturedImages[0]);
-                        for (var i = 1; i < capturedImages.length; i++) {
-                            formData.append('captured_images[]', capturedImages[i]);
-                        }
+                        fd.append('image', capturedImages[0]);
+                        for (var i = 1; i < capturedImages.length; i++) fd.append('captured_images[]', capturedImages[i]);
                     }
-
-                    uploadedImages.forEach(function (file, index) {
-                        formData.append('uploaded_images[]', file);
-                    });
-
-                    formData.append('total_images', capturedImages.length + uploadedImages.length);
-
-                    if (capturedImages.length === 0 && uploadedImages.length > 0) {
-                        formData.append('use_first_uploaded_as_main', '1');
-                    }
+                    uploadedImages.forEach(f => fd.append('uploaded_images[]', f));
+                    fd.append('total_images', capturedImages.length + uploadedImages.length);
+                    if (capturedImages.length === 0 && uploadedImages.length > 0) fd.append('use_first_uploaded_as_main', '1');
 
                     $.ajax({
-                        data: formData,
+                        data: fd,
                         url: "{{ route('cases.store') }}",
                         type: "POST",
                         processData: false,
                         contentType: false,
                         dataType: 'json',
-                        success: function (data) {
+                        success: function () {
                             window.location.href = "{{ route('cases.index') }}";
                         },
-                        error: function (data) {
-                            console.log('Error:', data);
-                            var err = jQuery.parseJSON(data.responseText);
-                            alert(err.message);
+                        error: function (d) {
+                            var msg = 'An error occurred. Please try again.';
+                            try { msg = jQuery.parseJSON(d.responseText).message; } catch (e) { }
+                            alert(msg);
                             $('#saveBtn').html('<iconify-icon icon="mdi:content-save" class="me-1"></iconify-icon>Save Case');
+                            $('#saveBtn').prop('disabled', false);
                         }
                     });
                 });
 
                 // Webcam Setup
-                Webcam.set({
-                    width: 490,
-                    height: 350,
-                    image_format: 'jpeg',
-                    jpeg_quality: 90
-                });
+                Webcam.set({ width: 400, height: 300, image_format: 'jpeg', jpeg_quality: 90 });
 
                 window.take_snapshot = function () {
-                    Webcam.snap(function (data_uri) {
-                        $(".image-tag").val(data_uri);
-                        capturedImages.push(data_uri);
+                    Webcam.snap(function (d) {
+                        $(".image-tag").val(d);
+                        capturedImages.push(d);
                         updateImagesDisplay();
                     });
-                }
+                };
 
-                window.sendvalue = function (event) {
-                    event.preventDefault();
-                    var cnic = document.getElementById('cnic').value;
-                    if (cnic) {
-                        var actionUrl = '{{ route("excases") }}';
-                        var form = document.createElement('form');
-                        form.method = 'POST';
-                        form.action = actionUrl;
-                        form.target = '_blank';
-
-                        var csrfInput = document.createElement('input');
-                        csrfInput.type = 'hidden';
-                        csrfInput.name = '_token';
-                        csrfInput.value = '{{ csrf_token() }}';
-                        form.appendChild(csrfInput);
-
-                        var cnicInput = document.createElement('input');
-                        cnicInput.type = 'hidden';
-                        cnicInput.name = 'id';
-                        cnicInput.value = cnic;
-                        form.appendChild(cnicInput);
-
-                        document.body.appendChild(form);
-                        form.submit();
-                        document.body.removeChild(form);
-                    } else {
-                        alert('Please enter a CNIC first.');
+                window.sendvalue = function (e) {
+                    e.preventDefault();
+                    var c = $('#cnic').val();
+                    if (c) {
+                        var f = document.createElement('form');
+                        f.method = 'POST';
+                        f.action = '{{ route("excases") }}';
+                        f.target = '_blank';
+                        var t = document.createElement('input');
+                        t.type = 'hidden'; t.name = '_token'; t.value = '{{ csrf_token() }}';
+                        f.appendChild(t);
+                        var i = document.createElement('input');
+                        i.type = 'hidden'; i.name = 'id'; i.value = c;
+                        f.appendChild(i);
+                        document.body.appendChild(f);
+                        f.submit();
+                        document.body.removeChild(f);
                     }
-                }
+                };
 
-                $('#cameraModal').on('shown.bs.modal', function () {
-                    Webcam.attach('#my_camera');
-                });
+                $('#cameraModal').on('shown.bs.modal', function () { Webcam.attach('#my_camera'); });
+                $('#cameraModal').on('hidden.bs.modal', function () { Webcam.reset(); });
             });
         </script>
     @endpush
