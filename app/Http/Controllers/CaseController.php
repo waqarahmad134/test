@@ -181,6 +181,10 @@ class CaseController extends Controller
         $data = [
             'p1' => $request->p1,
             'p2' => $request->p2,
+            'p1_urdu' => $request->p1_urdu,
+            'p2_urdu' => $request->p2_urdu,
+            'district' => $request->district,
+            'tehsil' => $request->tehsil,
             'a_date' => $request->a_date,
             'cno' => $request->cno,
             'caset' => $request->caset,
@@ -201,6 +205,19 @@ class CaseController extends Controller
             'court_name' => $request->court_name,
             'judge_id' => $request->judge_id,
             'ps_id' => $request->ps_id,
+            'direction_from' => $request->direction_from,
+            'is_juvenile' => $request->has('is_juvenile') ? 1 : 0,
+            'is_overseas' => $request->has('is_overseas') ? 1 : 0,
+            'is_women_petitioner' => $request->has('is_women_petitioner') ? 1 : 0,
+            'is_women_respondent' => $request->has('is_women_respondent') ? 1 : 0,
+            'suit_valuation' => $request->suit_valuation,
+            'civil_jurisdiction' => $request->civil_jurisdiction,
+            'case_status' => $request->case_status ?? 'Pending',
+            'next_date' => $request->next_date,
+            'case_stage' => $request->case_stage,
+            'adjournment_reason' => $request->adjournment_reason,
+            'short_order' => $request->short_order,
+            'cp_remarks' => $request->cp_remarks,
         ];
 
         // Only update pic if we have a file
@@ -305,6 +322,78 @@ class CaseController extends Controller
         } else {
             $r = "notfound";
             return response()->json($r);
+        }
+    }
+
+    /**
+     * Translate English text to Urdu using external API (Server-side proxy to bypass CORS)
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function translateToUrdu(Request $request)
+    {
+        $englishText = $request->input('english_text', '');
+
+        if (empty(trim($englishText))) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No text provided',
+                'urdu_text' => ''
+            ]);
+        }
+
+        try {
+            // Use cURL to make the request server-side (bypasses CORS)
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://dsj.punjab.gov.pk/admin/caseentries/geturdu');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+                'english_text' => $englishText
+            ]));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'Content-Type: application/x-www-form-urlencoded',
+                'Accept: application/json'
+            ]);
+
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $error = curl_error($ch);
+            curl_close($ch);
+
+            if ($error) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Translation service unavailable',
+                    'urdu_text' => ''
+                ]);
+            }
+
+            $data = json_decode($response, true);
+
+            if ($data && isset($data['status']) && $data['status'] === 'success') {
+                return response()->json([
+                    'status' => 'success',
+                    'urdu_text' => $data['urdu_text'] ?? ''
+                ]);
+            }
+
+            // If external API fails, return the original text (user can manually edit)
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Translation failed',
+                'urdu_text' => ''
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Translation service error',
+                'urdu_text' => ''
+            ]);
         }
     }
 

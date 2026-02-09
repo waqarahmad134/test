@@ -53,6 +53,7 @@ Route::post('/autocomplete/fetch', [AutocompleteController::class, 'fetch'])->na
 Route::get('/home', [DashboardController::class, 'index'])->name('home');
 Route::get('cnic/{id}', [CaseController::class, 'cnic'])->name('cnic');
 Route::get('fir/{id}', [CaseController::class, 'fir'])->name('fir');
+Route::post('translate-urdu', [CaseController::class, 'translateToUrdu'])->name('translate.urdu');
 Route::get('/search', [DashboardController::class, 'search'])->name('search');
 Route::get('/searching', [welcome::class, 'searching'])->name('search');
 // Removed importExportView route - import view deleted

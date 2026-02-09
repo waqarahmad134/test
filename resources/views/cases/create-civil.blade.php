@@ -101,15 +101,105 @@
             background: transparent !important;
         }
 
-        .sw-theme-arrows .toolbar {
-            padding: 15px 0;
-            margin-top: 20px;
-            border-top: 1px solid #dee2e6;
+        /* Modern Block Wizard Styles */
+        #smartwizard {
+            background-color: transparent !important;
+            border: none !important;
+        }
+
+        #smartwizard .nav {
+            margin-bottom: 25px !important;
+            border-radius: 8px !important;
+            overflow: hidden !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+            border: none !important;
+            display: flex !important;
+            width: 100% !important;
+        }
+
+        #smartwizard .nav-item {
+            flex: 1 1 0% !important;
+            margin: 0 !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        #smartwizard .nav-item:last-child {
+            border-right: none !important;
+        }
+
+        #smartwizard .nav-link {
+            height: 70px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            padding: 0 15px !important;
+            background: #48bb78 !important;
+            /* Native Green */
+            color: #fff !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            position: relative !important;
+        }
+
+        /* Icon styling within the nav link */
+        #smartwizard .nav-link iconify-icon {
+            font-size: 1.4rem !important;
+            margin-right: 10px !important;
+            opacity: 0.9 !important;
+        }
+
+        /* Active Step Style */
+        #smartwizard .nav-link.active {
+            background: #276749 !important;
+            /* Dark Green */
+            color: #ffffff !important;
+            box-shadow: inset 0 -4px 0 rgba(255, 255, 255, 0.3) !important;
+        }
+
+        /* Completed/Done Step Style */
+        #smartwizard .nav-link.done {
+            background: #38a169 !important;
+            /* Medium Green */
+            color: #ffffff !important;
+        }
+
+        /* Hover Effect */
+        #smartwizard .nav-link:hover {
+            opacity: 0.95 !important;
+            color: #fff !important;
+        }
+
+        .sw-theme-default .toolbar {
+            padding: 20px 0 !important;
+            margin-top: 20px !important;
+            border-top: 1px solid #dee2e6 !important;
+            display: flex !important;
+            justify-content: flex-end !important;
+            align-items: center !important;
+            gap: 10px !important;
+            flex-wrap: nowrap !important;
+            width: 100% !important;
+        }
+
+        .sw-btn-group-nav,
+        .sw-toolbar-extra {
+            display: flex !important;
+            gap: 10px !important;
+            float: none !important;
+            margin: 0 !important;
+            width: auto !important;
         }
 
         .sw-theme-arrows .toolbar .btn {
-            padding: 10px 25px;
-            font-weight: 600;
+            padding: 10px 25px !important;
+            font-weight: 600 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
         }
 
         /* Section Headers */
@@ -863,7 +953,7 @@
 
                             <!-- Direction Details -->
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="direction_from">Direction Issued From</label>
                                         <select class="form-control" id="direction_from" name="direction_from">
@@ -875,34 +965,20 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="direction_detail">Direction (Letter No. & Dated)</label>
-                                        <input type="text" class="form-control" id="direction_detail"
-                                            name="direction_detail" placeholder="Details">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="direction_end_date">Direction End Date</label>
-                                        <input type="date" class="form-control" id="direction_end_date"
-                                            name="direction_end_date">
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Checkboxes Row -->
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>This case includes:</label>
-                                        <div class="d-flex gap-3 mt-1">
-                                            <div class="form-check">
+                                        <div class="row gap-3 mt-1">
+                                            <div class="col-5 form-check">
                                                 <input class="form-check-input" type="checkbox" name="is_juvenile"
                                                     id="is_juvenile" value="1">
                                                 <label class="form-check-label" for="is_juvenile">Juvenile</label>
                                             </div>
-                                            <div class="form-check">
+                                            <div class="col-5 form-check">
                                                 <input class="form-check-input" type="checkbox" name="is_overseas"
                                                     id="is_overseas" value="1">
                                                 <label class="form-check-label" for="is_overseas">Overseas</label>
@@ -910,16 +986,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Women involvement:</label>
-                                        <div class="d-flex gap-3 mt-1">
-                                            <div class="form-check">
+                                        <div class="row gap-3 mt-1">
+                                            <div class="col-5 form-check">
                                                 <input class="form-check-input" type="checkbox" name="is_women_petitioner"
                                                     id="is_women_petitioner" value="1">
                                                 <label class="form-check-label" for="is_women_petitioner">Petitioner</label>
                                             </div>
-                                            <div class="form-check">
+                                            <div class="col-5 form-check">
                                                 <input class="form-check-input" type="checkbox" name="is_women_respondent"
                                                     id="is_women_respondent" value="1">
                                                 <label class="form-check-label" for="is_women_respondent">Respondent</label>
@@ -927,38 +1003,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="connected_case">Connected Case</label>
-                                        <div class="input-group">
-                                            <div class="input-group-text">
-                                                <input class="form-check-input mt-0" type="checkbox" id="is_connected"
-                                                    name="is_connected" value="1">
-                                            </div>
-                                            <input type="text" class="form-control" id="connected_case"
-                                                name="connected_case" placeholder="Main case no." disabled>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
-                            <!-- Mouza and Remarks -->
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mouza">Mouza (Area)</label>
-                                        <input type="text" class="form-control" id="mouza" name="mouza"
-                                            placeholder="Area/Location">
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label for="remarks">Remarks</label>
-                                        <textarea class="form-control" id="remarks" name="remarks" rows="2"
-                                            placeholder="Additional notes..."></textarea>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
 
@@ -1186,13 +1232,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"></script>
 
         <script>
-            // Urdu Translation Function
+            // Urdu Tra     nslation Function (uses local proxy to bypass CORS)
             function text_translate(from, to) {
                 var english_text = $.trim($(from).val());
 
                 if (english_text !== "") {
                     $.ajax({
-                        url: 'https://dsj.punjab.gov.pk/admin/caseentries/geturdu',
+                        url: '{{ route("translate.urdu") }}',
                         type: 'POST',
                         data: { english_text: english_text, '_token': '{{ csrf_token() }}' },
                         dataType: 'json',
@@ -1249,36 +1295,131 @@
                 updateImagesDisplay();
             });
 
-            $('#is_connected').on('change', function () {
-                $('#connected_case').prop('disabled', !this.checked);
-                if (!this.checked) $('#connected_case').val('');
-            });
 
             $(document).ready(function () {
                 // Initialize SmartWizard
                 $('#smartwizard').smartWizard({
                     selected: 0,
-                    theme: 'arrows',
-                    autoAdjustHeight: true,
-                    transition: { animation: 'slideHorizontal' },
-                    toolbar: {
-                        position: 'bottom',
-                        extraHtml: '<button class="btn btn-success" id="saveBtn" type="button"><iconify-icon icon="mdi:content-save" class="me-1"></iconify-icon>Save & Finish</button>'
-                    },
-                    anchor: { enableNavigation: true, enableDoneState: true, markPreviousStepsAsDone: true },
-                    keyboard: { keyNavigation: false },
-                    lang: {
-                        next: 'Next <iconify-icon icon="mdi:arrow-right"></iconify-icon>',
-                        previous: '<iconify-icon icon="mdi:arrow-left"></iconify-icon> Previous'
-                    }
-                });
+                    theme: 'default',
+                            autoAdjustHeight: true,
+                            transition: { animation: 'slideHorizontal' },
+                            toolbar: {
+                                position: 'bottom',
+                                showNextButton: false,
+                                showPreviousButton: false,
+                                extraHtml: '<button class="btn btn-secondary sw-btn-prev" type="button"><iconify-icon icon="mdi:arrow-left" class="me-1"></iconify-icon>Previous</button>' +
+                                    '<button class="btn btn-primary sw-btn-next" type="button">Next<iconify-icon icon="mdi:arrow-right" class="ms-1"></iconify-icon></button>' +
+                                    '<button class="btn btn-success" id="saveBtn" type="button"><iconify-icon icon="mdi:content-save" class="me-1"></iconify-icon>Save & Finish</button>'
+                            },
+                            anchor: { enableNavigation: true, enableDoneState: true, markPreviousStepsAsDone: true },
+                            keyboard: { keyNavigation: false }
+                        });
 
-                // Step validation before moving to next step
-                $("#smartwizard").on("leaveStep", function (e, anchorObject, stepIndex, stepDirection) {
-                    if (stepDirection === 'forward') {
-                        if (stepIndex === 0) {
+                        // Step validation before moving to next step
+                        $("#smartwizard").on("leaveStep", function (e, anchorObject, stepIndex, stepDirection) {
+                            if (stepDirection === 'forward') {
+                                if (stepIndex === 0) {
+                                    let valid = true;
+                                    const requiredFields = ['#judge_id', '#district', '#tehsil', '#p1', '#p2', '#i_date', '#i_no', '#a_date', '#cat', '#subcat'];
+                                    requiredFields.forEach(field => {
+                                        if ($(field).val() === '' || $(field).val() === null) {
+                                            $(field).addClass('is-invalid');
+                                            valid = false;
+                                        } else {
+                                            $(field).removeClass('is-invalid');
+                                        }
+                                    });
+                                    if (!valid) {
+                                        alert('Please fill all required fields in Basic Details');
+                                        return false;
+                                    }
+                                }
+                            }
+                            return true;
+                        });
+
+                        // CNIC Input Mask
+                        $('#cnic').inputmask({
+                            mask: '99999-9999999-9',
+                            placeholder: 'XXXXX-XXXXXXX-X',
+                            showMaskOnHover: true,
+                            showMaskOnFocus: true,
+                            clearIncomplete: true
+                        });
+
+                        var cnicPattern = /^\d{5}-\d{7}-\d{1}$/;
+
+                        function validateCNIC() {
+                            var v = $('#cnic').inputmask('unmaskedvalue'), d = $('#cnic').val();
+                            if (d === '' || d === '_____-_______-_') {
+                                $('#cnic_error').hide();
+                                $('#cnic').removeClass('is-invalid is-valid');
+                                return true;
+                            }
+                            if (v.length === 13 && cnicPattern.test(d)) {
+                                $('#cnic_error').hide();
+                                $('#cnic').removeClass('is-invalid').addClass('is-valid');
+                                return true;
+                            } else {
+                                $('#cnic_error').show();
+                                $('#cnic').removeClass('is-valid').addClass('is-invalid');
+                                return false;
+                            }
+                        }
+
+                        $('#cnic').on('blur', validateCNIC).on('input', function () {
+                            if ($(this).inputmask('unmaskedvalue').length >= 5) validateCNIC();
+                        });
+
+                        $('#check_cnic').hide();
+                        $('#cnic').on('keyup', function () {
+                            $('#check_cnic').hide();
+                            var c = $(this).val().trim();
+                            if (c.length === 15 && cnicPattern.test(c)) {
+                                $.get("{{ url('cnic') }}/" + c, function (d) { if (d == "found") $('#check_cnic').show(); });
+                            }
+                        });
+
+                        $('#check_fir').hide();
+                        $('#i_no').on('keyup', function () {
+                            $('#check_fir').hide();
+                            var c = $(this).val();
+                            if (c !== '') {
+                                $.get("{{ url('fir') }}/" + c, function (d) { if (d == "found") $('#check_fir').show(); });
+                            }
+                        });
+
+                        window.changeCategory = function () {
+                            var c = $('#cat').val();
+                            if (c == '') {
+                                $('#subcat').val('').prop('disabled', true);
+                            } else {
+                                $('#subcat').prop('disabled', false);
+                                $('#subcat .subcat-option').hide().filter('[data-cat-id="' + c + '"]').show();
+                                $('#subcat').val('');
+                            }
+                        };
+
+                        // District/Tehsil Handling
+                        window.changeTehsil = function () {
+                            var d = $('#district').val();
+                            if (d == '') {
+                                $('#tehsil').val('').prop('disabled', true);
+                            } else {
+                                $('#tehsil').prop('disabled', false);
+                                $('#tehsil .tehsil-option').hide().filter('[data-district-id="' + d + '"]').show();
+                                $('#tehsil').val('');
+                            }
+                        };
+
+                        $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+
+                        // Save & Finish Button
+                        $(document).on('click', '#saveBtn', function (e) {
+                            e.preventDefault();
+
                             let valid = true;
-                            const requiredFields = ['#judge_id', '#district', '#tehsil', '#p1', '#p2', '#i_date', '#i_no', '#a_date', '#cat', '#subcat'];
+                            const requiredFields = ['#next_date', '#case_stage'];
                             requiredFields.forEach(field => {
                                 if ($(field).val() === '' || $(field).val() === null) {
                                     $(field).addClass('is-invalid');
@@ -1287,177 +1428,78 @@
                                     $(field).removeClass('is-invalid');
                                 }
                             });
+
                             if (!valid) {
-                                alert('Please fill all required fields in Basic Details');
+                                alert('Please fill all required fields in Proceedings');
                                 return false;
                             }
-                        }
-                    }
-                    return true;
-                });
 
-                // CNIC Input Mask
-                $('#cnic').inputmask({
-                    mask: '99999-9999999-9',
-                    placeholder: 'XXXXX-XXXXXXX-X',
-                    showMaskOnHover: true,
-                    showMaskOnFocus: true,
-                    clearIncomplete: true
-                });
+                            var cv = $('#cnic').val().trim();
+                            if (cv !== '' && cv !== '_____-_______-_' && !validateCNIC()) {
+                                $('#smartwizard').smartWizard("goToStep", 0);
+                                $('#cnic').focus();
+                                return false;
+                            }
 
-                var cnicPattern = /^\d{5}-\d{7}-\d{1}$/;
+                            $(this).html('<iconify-icon icon="mdi:loading" class="me-1 spin"></iconify-icon>Saving...');
+                            $(this).prop('disabled', true);
 
-                function validateCNIC() {
-                    var v = $('#cnic').inputmask('unmaskedvalue'), d = $('#cnic').val();
-                    if (d === '' || d === '_____-_______-_') {
-                        $('#cnic_error').hide();
-                        $('#cnic').removeClass('is-invalid is-valid');
-                        return true;
-                    }
-                    if (v.length === 13 && cnicPattern.test(d)) {
-                        $('#cnic_error').hide();
-                        $('#cnic').removeClass('is-invalid').addClass('is-valid');
-                        return true;
-                    } else {
-                        $('#cnic_error').show();
-                        $('#cnic').removeClass('is-valid').addClass('is-invalid');
-                        return false;
-                    }
-                }
+                            var fd = new FormData($('#caseForm')[0]);
 
-                $('#cnic').on('blur', validateCNIC).on('input', function () {
-                    if ($(this).inputmask('unmaskedvalue').length >= 5) validateCNIC();
-                });
+                            if (capturedImages.length > 0) {
+                                fd.append('image', capturedImages[0]);
+                                for (var i = 1; i < capturedImages.length; i++) fd.append('captured_images[]', capturedImages[i]);
+                            }
+                            uploadedImages.forEach(f => fd.append('uploaded_images[]', f));
+                            fd.append('total_images', capturedImages.length + uploadedImages.length);
+                            if (capturedImages.length === 0 && uploadedImages.length > 0) fd.append('use_first_uploaded_as_main', '1');
 
-                $('#check_cnic').hide();
-                $('#cnic').on('keyup', function () {
-                    $('#check_cnic').hide();
-                    var c = $(this).val().trim();
-                    if (c.length === 15 && cnicPattern.test(c)) {
-                        $.get("{{ url('cnic') }}/" + c, function (d) { if (d == "found") $('#check_cnic').show(); });
-                    }
-                });
+                            $.ajax({
+                                data: fd,
+                                url: "{{ route('cases.store') }}",
+                                type: "POST",
+                                processData: false,
+                                contentType: false,
+                                dataType: 'json',
+                                success: function () {
+                                    window.location.href = "{{ route('cases.index') }}";
+                                },
+                                error: function (d) {
+                                    var msg = 'An error occurred. Please try again.';
+                                    try { msg = jQuery.parseJSON(d.responseText).message; } catch (e) { }
+                                    alert(msg);
+                                    $('#saveBtn').html('<iconify-icon icon="mdi:content-save" class="me-1"></iconify-icon>Save & Finish');
+                                    $('#saveBtn').prop('disabled', false);
+                                }
+                            });
+                        });
 
-                $('#check_fir').hide();
-                $('#i_no').on('keyup', function () {
-                    $('#check_fir').hide();
-                    var c = $(this).val();
-                    if (c !== '') {
-                        $.get("{{ url('fir') }}/" + c, function (d) { if (d == "found") $('#check_fir').show(); });
-                    }
-                });
+                        // Webcam Setup
+                        Webcam.set({ width: 400, height: 300, image_format: 'jpeg', jpeg_quality: 90 });
 
-                window.changeCategory = function () {
-                    var c = $('#cat').val();
-                    if (c == '') {
-                        $('#subcat').val('').prop('disabled', true);
-                    } else {
-                        $('#subcat').prop('disabled', false);
-                        $('#subcat .subcat-option').hide().filter('[data-cat-id="' + c + '"]').show();
-                        $('#subcat').val('');
-                    }
-                };
+                        window.take_snapshot = function () {
+                            Webcam.snap(function (d) {
+                                $(".image-tag").val(d);
+                                capturedImages.push(d);
+                                updateImagesDisplay();
+                            });
+                        };
 
-                // District/Tehsil Handling
-                window.changeTehsil = function () {
-                    var d = $('#district').val();
-                    if (d == '') {
-                        $('#tehsil').val('').prop('disabled', true);
-                    } else {
-                        $('#tehsil').prop('disabled', false);
-                        $('#tehsil .tehsil-option').hide().filter('[data-district-id="' + d + '"]').show();
-                        $('#tehsil').val('');
-                    }
-                };
+                        window.sendvalue = function (e) {
+                            e.preventDefault();
+                            var c = $('#cnic').val();
+                            if (c) {
+                                var f = document.createElement('form'); f.method = 'POST'; f.action = '{{ route("excases") }}'; f.target = '_blank';
+                                var t = document.createElement('input'); t.type = 'hidden'; t.name = '_token'; t.value = '{{ csrf_token() }}'; f.appendChild(t);
+                                var i = document.createElement('input'); i.type = 'hidden'; i.name = 'id'; i.value = c; f.appendChild(i);
+                                document.body.appendChild(f); f.submit(); document.body.removeChild(f);
+                            }
+                        };
 
-                $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
-
-                // Save & Finish Button
-                $(document).on('click', '#saveBtn', function (e) {
-                    e.preventDefault();
-
-                    let valid = true;
-                    const requiredFields = ['#next_date', '#case_stage'];
-                    requiredFields.forEach(field => {
-                        if ($(field).val() === '' || $(field).val() === null) {
-                            $(field).addClass('is-invalid');
-                            valid = false;
-                        } else {
-                            $(field).removeClass('is-invalid');
-                        }
+                        $('#cameraModal').on('shown.bs.modal', function () { Webcam.attach('#my_camera'); });
+                        $('#cameraModal').on('hidden.bs.modal', function () { Webcam.reset(); });
                     });
-
-                    if (!valid) {
-                        alert('Please fill all required fields in Proceedings');
-                        return false;
-                    }
-
-                    var cv = $('#cnic').val().trim();
-                    if (cv !== '' && cv !== '_____-_______-_' && !validateCNIC()) {
-                        $('#smartwizard').smartWizard("goToStep", 0);
-                        $('#cnic').focus();
-                        return false;
-                    }
-
-                    $(this).html('<iconify-icon icon="mdi:loading" class="me-1 spin"></iconify-icon>Saving...');
-                    $(this).prop('disabled', true);
-
-                    var fd = new FormData($('#caseForm')[0]);
-
-                    if (capturedImages.length > 0) {
-                        fd.append('image', capturedImages[0]);
-                        for (var i = 1; i < capturedImages.length; i++) fd.append('captured_images[]', capturedImages[i]);
-                    }
-                    uploadedImages.forEach(f => fd.append('uploaded_images[]', f));
-                    fd.append('total_images', capturedImages.length + uploadedImages.length);
-                    if (capturedImages.length === 0 && uploadedImages.length > 0) fd.append('use_first_uploaded_as_main', '1');
-
-                    $.ajax({
-                        data: fd,
-                        url: "{{ route('cases.store') }}",
-                        type: "POST",
-                        processData: false,
-                        contentType: false,
-                        dataType: 'json',
-                        success: function () {
-                            window.location.href = "{{ route('cases.index') }}";
-                        },
-                        error: function (d) {
-                            var msg = 'An error occurred. Please try again.';
-                            try { msg = jQuery.parseJSON(d.responseText).message; } catch (e) { }
-                            alert(msg);
-                            $('#saveBtn').html('<iconify-icon icon="mdi:content-save" class="me-1"></iconify-icon>Save & Finish');
-                            $('#saveBtn').prop('disabled', false);
-                        }
-                    });
-                });
-
-                // Webcam Setup
-                Webcam.set({ width: 400, height: 300, image_format: 'jpeg', jpeg_quality: 90 });
-
-                window.take_snapshot = function () {
-                    Webcam.snap(function (d) {
-                        $(".image-tag").val(d);
-                        capturedImages.push(d);
-                        updateImagesDisplay();
-                    });
-                };
-
-                window.sendvalue = function (e) {
-                    e.preventDefault();
-                    var c = $('#cnic').val();
-                    if (c) {
-                        var f = document.createElement('form'); f.method = 'POST'; f.action = '{{ route("excases") }}'; f.target = '_blank';
-                        var t = document.createElement('input'); t.type = 'hidden'; t.name = '_token'; t.value = '{{ csrf_token() }}'; f.appendChild(t);
-                        var i = document.createElement('input'); i.type = 'hidden'; i.name = 'id'; i.value = c; f.appendChild(i);
-                        document.body.appendChild(f); f.submit(); document.body.removeChild(f);
-                    }
-                };
-
-                $('#cameraModal').on('shown.bs.modal', function () { Webcam.attach('#my_camera'); });
-                $('#cameraModal').on('hidden.bs.modal', function () { Webcam.reset(); });
-            });
-        </script>
+                </script>
     @endpush
 
 @endsection
