@@ -2,7 +2,7 @@ ssh -p 65002 u442793684@109.106.251.30
 AAaa11@@AAopen2code.com
 
 
-DOne this section
+DOne this section =>
 Fortnightly Statement removed
 Direction (Letter No. & Dated) removed
 Direction End Date removed
