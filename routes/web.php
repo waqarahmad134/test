@@ -67,6 +67,11 @@ Route::get('casesc', [CaseController::class, 'civil'])->name('cases.civil');
 Route::get('search/{f}/{t}/{type}', [CaseController::class, 'search'])->name('cases.search');
 Route::get('csearch', [CaseController::class, 'search1'])->name('cases.search1');
 Route::get('finalprint/{id}', [welcome::class, 'finalprint']);
+// Separate case creation pages
+Route::get('cases/create/civil', [CaseController::class, 'createCivil'])->name('cases.create.civil');
+Route::get('cases/create/criminal', [CaseController::class, 'createCriminal'])->name('cases.create.criminal');
+Route::get('cases/create/misc', [CaseController::class, 'createMisc'])->name('cases.create.misc');
+
 Route::resource('cases', CaseController::class);
 Route::resource('cats', CourtController::class);
 Route::resource('judges', JudgeController::class);
@@ -75,13 +80,13 @@ Route::resource('subcats', SubcatController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 
-Route::group(['middleware' =>  ['role:Admin|user', 'auth', ]], function() {
-   
-   
+Route::group(['middleware' => ['role:Admin|user', 'auth',]], function () {
+
+
 });
-Route::group(['middleware' =>  ['role:admin', 'auth', ]], function() {
- 
-   
+Route::group(['middleware' => ['role:admin', 'auth',]], function () {
+
+
 });
 Route::get('/students', [PrintController::class, 'index']);
 Route::get('/prnpriview', [PrintController::class, 'prnpriview']);

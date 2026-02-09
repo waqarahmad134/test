@@ -18,7 +18,7 @@ use Yajra\DataTables\Facades\DataTables;
 class CaseController extends Controller
 {
     //
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -35,31 +35,28 @@ class CaseController extends Controller
     public function find(Request $request)
     {
         return redirect()->route('cases', ['id' => $request->file_number]);
-        
 
-        
+
+
     }
     public function case($id)
     {
-        if (auth()->user()->hasRole(['user|author']))
-        {
-            $cases = auth()->user()->Cases()->where('file_number',$id)->latest()->paginate(5);
-            return view('cases.index',compact('cases'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        if (auth()->user()->hasRole(['user|author'])) {
+            $cases = auth()->user()->Cases()->where('file_number', $id)->latest()->paginate(5);
+            return view('cases.index', compact('cases'))
+                ->with('i', (request()->input('page', 1) - 1) * 5);
+        } else {
+            $cases = Cases::where('file_number', $id)->latest()->paginate(5);
+            return view('cases.index', compact('cases'))
+                ->with('i', (request()->input('page', 1) - 1) * 5);
         }
-        else
-        {
-            $cases = Cases::where('file_number',$id)->latest()->paginate(5);
-            return view('cases.index',compact('cases'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-        }
-      
+
     }
 
     public function excase(Request $request)
     {
-      $products = Cases::where('cnic',$request->id)->paginate('10');
-      return view('cases.excases',compact('products'));
+        $products = Cases::where('cnic', $request->id)->paginate('10');
+        return view('cases.excases', compact('products'));
     }
 
     public function index(Request $request)
@@ -94,6 +91,52 @@ class CaseController extends Controller
         return view('cases.create');
     }
 
+    /**
+     * Show the form for creating a new Civil/Family case.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createCivil()
+    {
+        $cats = Court::all();
+        $subcats = Subcat::all();
+        $judges = Judge::all()->sortBy('priority');
+        $pss = PS::all();
+
+        return view('cases.create-civil', compact('cats', 'subcats', 'judges', 'pss'));
+    }
+
+    /**
+     * Show the form for creating a new Criminal case.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createCriminal()
+    {
+        $cats = Court::all();
+        $subcats = Subcat::all();
+        $judges = Judge::all()->sortBy('priority');
+        $pss = PS::all();
+
+        return view('cases.create-criminal', compact('cats', 'subcats', 'judges', 'pss'));
+    }
+
+    /**
+     * Show the form for creating a new Misc case.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createMisc()
+    {
+        $cats = Court::all();
+        $subcats = Subcat::all();
+        $judges = Judge::all()->sortBy('priority');
+        $pss = PS::all();
+
+        return view('cases.create-misc', compact('cats', 'subcats', 'judges', 'pss'));
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -104,40 +147,38 @@ class CaseController extends Controller
     public function store(Request $request)
     {
 
-        if($request->image)
-        {
-        $img = $request->image;
+        if ($request->image) {
+            $img = $request->image;
 
-        $folderPath = "uploads/";
+            $folderPath = "uploads/";
 
-        
 
-        $image_parts = explode(";base64,", $img);
 
-        $image_type_aux = explode("image/", $image_parts[0]);
+            $image_parts = explode(";base64,", $img);
 
-        $image_type = $image_type_aux[1];
+            $image_type_aux = explode("image/", $image_parts[0]);
 
-        
+            $image_type = $image_type_aux[1];
 
-        $image_base64 = base64_decode($image_parts[1]);
 
-        $fileName = uniqid() . '.png';
 
-        
+            $image_base64 = base64_decode($image_parts[1]);
 
-        $file = $folderPath . $fileName;
+            $fileName = uniqid() . '.png';
 
-        Storage::put($file, $image_base64);
-        }
-        else 
-        {
+
+
+            $file = $folderPath . $fileName;
+
+            Storage::put($file, $image_base64);
+        } else {
             $file = $request->image1;
         }
-        if($request->user_id!="")
-        {
-                    Cases::updateOrCreate(['id' => $request->product_id],
-                    ['p1' => $request->p1,
+        if ($request->user_id != "") {
+            Cases::updateOrCreate(
+                ['id' => $request->product_id],
+                [
+                    'p1' => $request->p1,
                     'p2' => $request->p2,
                     'a_date' => $request->a_date,
                     'cno' => $request->cno,
@@ -161,13 +202,13 @@ class CaseController extends Controller
                     'user_id' => $request->user_id,
                     'ps_id' => $request->ps_id,
                     'pic' => $file
-                    ]
-                   );   
-                }
-                else
-                {
-                    Auth()->user()->Cases()->updateOrCreate(['id' => $request->product_id],
-                    ['p1' => $request->p1,
+                ]
+            );
+        } else {
+            Auth()->user()->Cases()->updateOrCreate(
+                ['id' => $request->product_id],
+                [
+                    'p1' => $request->p1,
                     'p2' => $request->p2,
                     'a_date' => $request->a_date,
                     'cno' => $request->cno,
@@ -190,12 +231,12 @@ class CaseController extends Controller
                     'judge_id' => $request->judge_id,
                     'ps_id' => $request->ps_id,
                     'pic' => $file
-                    ]
-                   );   
+                ]
+            );
 
-                }
+        }
 
-                return response()->json(['success'=>'Case saved successfully.']);
+        return response()->json(['success' => 'Case saved successfully.']);
 
     }
 
@@ -208,7 +249,7 @@ class CaseController extends Controller
      */
     public function show(Cases $case)
     {
-        return view('cases.show',compact('case'));
+        return view('cases.show', compact('case'));
     }
 
 
@@ -233,13 +274,13 @@ class CaseController extends Controller
      */
     public function update(Request $request, Cases $case)
     {
-        
+
 
         $case->update($request->all());
 
 
         return redirect()->route('cases.index')
-                        ->with('success','Case updated successfully');
+            ->with('success', 'Case updated successfully');
     }
 
 
@@ -254,19 +295,16 @@ class CaseController extends Controller
         $case->delete();
 
 
-        return response()->json(['success'=>'Product deleted successfully.']);
+        return response()->json(['success' => 'Product deleted successfully.']);
     }
 
     public function cnic($id)
     {
-        $c = Cases::where('cnic',$id)->first();
-        if($c)
-        {
+        $c = Cases::where('cnic', $id)->first();
+        if ($c) {
             $r = "found";
             return response()->json($r);
-        }
-        else
-        {
+        } else {
             $r = "notfound";
             return response()->json($r);
         }
@@ -274,14 +312,11 @@ class CaseController extends Controller
 
     public function fir($id)
     {
-        $c = Cases::where('i_no',$id)->count();
-        if($c>=4)
-        {
+        $c = Cases::where('i_no', $id)->count();
+        if ($c >= 4) {
             $r = "found";
             return response()->json($r);
-        }
-        else
-        {
+        } else {
             $r = "notfound";
             return response()->json($r);
         }
@@ -292,265 +327,250 @@ class CaseController extends Controller
     {
         $cats = Court::all();
         $products = Cases::select('*')
-        ->whereMonth('created_at', Carbon::now()->month)
-        ->get();
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->get();
         $subcats = Subcat::all();
         $judges = Judge::all();
         $pss = PS::all();
-        
-   
+
+
         if ($request->ajax()) {
             $data = Cases::select('*')
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->get();
-            
+                ->whereMonth('created_at', Carbon::now()->month)
+                ->get();
+
             return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-   
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
-   
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
-    
-                            return $btn;
-                    })
-                    ->addColumn('cat', function($row){
-                       
-                        return  $row->cname($row->cat);
-                                                               
-                                         })
-                                         ->addColumn('ps', function($row){
-                       if($row->ps_id)
-                       {
-                                            return  $row->psname($row->ps_id);
-                       }
-                       else
-                       {
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+
+                    return $btn;
+                })
+                ->addColumn('cat', function ($row) {
+
+                    return $row->cname($row->cat);
+
+                })
+                ->addColumn('ps', function ($row) {
+                    if ($row->ps_id) {
+                        return $row->psname($row->ps_id);
+                    } else {
                         return "";
-                       }
-                                                                                   
-                                                             })
-                                         ->addColumn('subcat', function($row){
-                       
-                                            return  $row->sname($row->subcat);
-                                                                                   
-                                                             })
-                                                             ->addColumn('judge_name', function($row){
-                       
-                                                                return  $row->jname($row->judge_id);
-                                                                                                       
-                                                                                 })
-                    
-                    ->rawColumns(['action','cat','subcat','judge_name','ps'])
-                    ->make(true);
+                    }
+
+                })
+                ->addColumn('subcat', function ($row) {
+
+                    return $row->sname($row->subcat);
+
+                })
+                ->addColumn('judge_name', function ($row) {
+
+                    return $row->jname($row->judge_id);
+
+                })
+
+                ->rawColumns(['action', 'cat', 'subcat', 'judge_name', 'ps'])
+                ->make(true);
         }
-      
-        return view('cases.index1',compact('products','cats','subcats','judges','pss'));
 
-      
+        return view('cases.index1', compact('products', 'cats', 'subcats', 'judges', 'pss'));
 
-    
-}
 
-public function criminal(Request $request)
-{
-    $cats = Court::all();
-    $products = Cases::where('c_type', '!=', '')->get();
-    $subcats = Subcat::all();
-    $judges = Judge::all();
-    $pss = PS::all();
-    
 
-    if ($request->ajax()) {
-        $data = Cases::where('c_type', '!=', '')->get();
-        
-        return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
 
-                       $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
-
-                       $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
-
-                        return $btn;
-                })
-                ->addColumn('cat', function($row){
-                   
-                    return  $row->cname($row->cat);
-                                                           
-                                     })
-                                     ->addColumn('ps', function($row){
-                   if($row->ps_id)
-                   {
-                                        return  $row->psname($row->ps_id);
-                   }
-                   else
-                   {
-                    return "";
-                   }
-                                                                               
-                                                         })
-                                     ->addColumn('subcat', function($row){
-                   
-                                        return  $row->sname($row->subcat);
-                                                                               
-                                                         })
-                                                         ->addColumn('judge_name', function($row){
-                   
-                                                            return  $row->jname($row->judge_id);
-                                                                                                   
-                                                                             })
-                
-                ->rawColumns(['action','cat','subcat','judge_name','ps'])
-                ->make(true);
     }
-  
-    return view('cases.index2',compact('products','cats','subcats','judges','pss'));
 
-  
-
-
-}
-
-public function civil(Request $request)
-{
-    $cats = Court::all();
-    $products = Cases::where('jur', '!=', '')->get();
-    $subcats = Subcat::all();
-    $judges = Judge::all();
-    $pss = PS::all();
-    
-
-    if ($request->ajax()) {
-        $data = Cases::where('jur', '!=', '')->get();
-        
-        return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-
-                       $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
-
-                       $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
-
-                        return $btn;
-                })
-                ->addColumn('cat', function($row){
-                   
-                    return  $row->cname($row->cat);
-                                                           
-                                     })
-                                     ->addColumn('ps', function($row){
-                   if($row->ps_id)
-                   {
-                                        return  $row->psname($row->ps_id);
-                   }
-                   else
-                   {
-                    return "";
-                   }
-                                                                               
-                                                         })
-                                     ->addColumn('subcat', function($row){
-                   
-                                        return  $row->sname($row->subcat);
-                                                                               
-                                                         })
-                                                         ->addColumn('judge_name', function($row){
-                   
-                                                            return  $row->jname($row->judge_id);
-                                                                                                   
-                                                                             })
-                
-                ->rawColumns(['action','cat','subcat','judge_name','ps'])
-                ->make(true);
-    }
-  
-    return view('cases.index3',compact('products','cats','subcats','judges','pss'));
-
-  
-
-
-}
-public function search(Request $request,$f,$t,$type)
-{
-
-    $cats = Court::all();
-    if($type=="all")
+    public function criminal(Request $request)
     {
-    $products = Cases::where('i_date', '>=', $f)->where('i_date','<=',$t)->get();
-    }
-    if($type=="civil")
-    {
-        $products = Cases::where('i_date', '>=', $f)->where('i_date','<=',$t)->where('jur', '!=', '')->get();
-    }
-    if($type=="criminal")
-    {
-        $products = Cases::where('i_date', '>=', $f)->where('i_date','<=',$t)->where('c_type', '!=', '')->get();
-    }
-    
-    $subcats = Subcat::all();
-    $judges = Judge::all();
-    $pss = PS::all();
-    
+        $cats = Court::all();
+        $products = Cases::where('c_type', '!=', '')->get();
+        $subcats = Subcat::all();
+        $judges = Judge::all();
+        $pss = PS::all();
 
-    if ($request->ajax()) {
-        $data = $products;
-        
-        return Datatables::of($data)
+
+        if ($request->ajax()) {
+            $data = Cases::where('c_type', '!=', '')->get();
+
+            return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
+                ->addColumn('action', function ($row) {
 
-                       $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
 
-                       $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
 
-                        return $btn;
+                    return $btn;
                 })
-                ->addColumn('cat', function($row){
-                   
-                    return  $row->cname($row->cat);
-                                                           
-                                     })
-                                     ->addColumn('ps', function($row){
-                   if($row->ps_id)
-                   {
-                                        return  $row->psname($row->ps_id);
-                   }
-                   else
-                   {
-                    return "";
-                   }
-                                                                               
-                                                         })
-                                     ->addColumn('subcat', function($row){
-                   
-                                        return  $row->sname($row->subcat);
-                                                                               
-                                                         })
-                                                         ->addColumn('judge_name', function($row){
-                   
-                                                            return  $row->jname($row->judge_id);
-                                                                                                   
-                                                                             })
-                
-                ->rawColumns(['action','cat','subcat','judge_name','ps'])
+                ->addColumn('cat', function ($row) {
+
+                    return $row->cname($row->cat);
+
+                })
+                ->addColumn('ps', function ($row) {
+                    if ($row->ps_id) {
+                        return $row->psname($row->ps_id);
+                    } else {
+                        return "";
+                    }
+
+                })
+                ->addColumn('subcat', function ($row) {
+
+                    return $row->sname($row->subcat);
+
+                })
+                ->addColumn('judge_name', function ($row) {
+
+                    return $row->jname($row->judge_id);
+
+                })
+
+                ->rawColumns(['action', 'cat', 'subcat', 'judge_name', 'ps'])
                 ->make(true);
+        }
+
+        return view('cases.index2', compact('products', 'cats', 'subcats', 'judges', 'pss'));
+
+
+
+
     }
-  
-    return view('cases.index3',compact('products','cats','subcats','judges','pss'));
 
-  
+    public function civil(Request $request)
+    {
+        $cats = Court::all();
+        $products = Cases::where('jur', '!=', '')->get();
+        $subcats = Subcat::all();
+        $judges = Judge::all();
+        $pss = PS::all();
 
 
-}
-public function search1(Request $request)
-{
-    $cats = Court::all();
-    $products = Cases::where('jur', '!=', '')->get();
-    $subcats = Subcat::all();
-    $judges = Judge::all();
-    $pss = PS::all();
-    return view('cases.search',compact('products','cats','subcats','judges','pss','request'));
+        if ($request->ajax()) {
+            $data = Cases::where('jur', '!=', '')->get();
 
-}
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+
+                    return $btn;
+                })
+                ->addColumn('cat', function ($row) {
+
+                    return $row->cname($row->cat);
+
+                })
+                ->addColumn('ps', function ($row) {
+                    if ($row->ps_id) {
+                        return $row->psname($row->ps_id);
+                    } else {
+                        return "";
+                    }
+
+                })
+                ->addColumn('subcat', function ($row) {
+
+                    return $row->sname($row->subcat);
+
+                })
+                ->addColumn('judge_name', function ($row) {
+
+                    return $row->jname($row->judge_id);
+
+                })
+
+                ->rawColumns(['action', 'cat', 'subcat', 'judge_name', 'ps'])
+                ->make(true);
+        }
+
+        return view('cases.index3', compact('products', 'cats', 'subcats', 'judges', 'pss'));
+
+
+
+
+    }
+    public function search(Request $request, $f, $t, $type)
+    {
+
+        $cats = Court::all();
+        if ($type == "all") {
+            $products = Cases::where('i_date', '>=', $f)->where('i_date', '<=', $t)->get();
+        }
+        if ($type == "civil") {
+            $products = Cases::where('i_date', '>=', $f)->where('i_date', '<=', $t)->where('jur', '!=', '')->get();
+        }
+        if ($type == "criminal") {
+            $products = Cases::where('i_date', '>=', $f)->where('i_date', '<=', $t)->where('c_type', '!=', '')->get();
+        }
+
+        $subcats = Subcat::all();
+        $judges = Judge::all();
+        $pss = PS::all();
+
+
+        if ($request->ajax()) {
+            $data = $products;
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+
+                    return $btn;
+                })
+                ->addColumn('cat', function ($row) {
+
+                    return $row->cname($row->cat);
+
+                })
+                ->addColumn('ps', function ($row) {
+                    if ($row->ps_id) {
+                        return $row->psname($row->ps_id);
+                    } else {
+                        return "";
+                    }
+
+                })
+                ->addColumn('subcat', function ($row) {
+
+                    return $row->sname($row->subcat);
+
+                })
+                ->addColumn('judge_name', function ($row) {
+
+                    return $row->jname($row->judge_id);
+
+                })
+
+                ->rawColumns(['action', 'cat', 'subcat', 'judge_name', 'ps'])
+                ->make(true);
+        }
+
+        return view('cases.index3', compact('products', 'cats', 'subcats', 'judges', 'pss'));
+
+
+
+
+    }
+    public function search1(Request $request)
+    {
+        $cats = Court::all();
+        $products = Cases::where('jur', '!=', '')->get();
+        $subcats = Subcat::all();
+        $judges = Judge::all();
+        $pss = PS::all();
+        return view('cases.search', compact('products', 'cats', 'subcats', 'judges', 'pss', 'request'));
+
+    }
 }

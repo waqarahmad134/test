@@ -1,0 +1,1076 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case | Case Management System</title>
+<link rel="SHORTCUT ICON" href="https://dsj.punjab.gov.pk/images/icon.gif"/>
+<meta name="description" content="Online Case Management System, District Judiciary Punjab">
+<link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/css/plugins/bootstrap/dist/css/bootstrap.css"><link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/css/plugins/font-awesome/css/font-awesome.min.css"><link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/css/wizard.css"><link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/css/custom.css"><link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/css/plugins/nprogress/nprogress.css">
+    <link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/css/plugins/parsley/parsley.css">
+    <link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/css/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+    <link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/css/plugins/touchspin/jquery.bootstrap-touchspin.min.css">
+    <link media="all" type="text/css" rel="stylesheet" href="https://dsj.punjab.gov.pk/assets/select2/dist/css/select2.css">
+    <script src="https://dsj.punjab.gov.pk/js/plugins/urdu-webpad/urdu-webpad.js"></script>
+    <script type="text/javascript">initUrduEditor()</script>  
+    
+  </head>
+
+  <!--<body class="nav-sm">-->
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        
+      <!-- Left Menu Bar -->
+      <!-- menu bar -->
+  <div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+      <div class="navbar nav_title" style="border: 0;"> 
+      	        	<a href="https://dsj.punjab.gov.pk/admin/dashboard" class="site_title">
+                <div class="profile_pic">
+          <img src="https://dsj.punjab.gov.pk/images/logo.png" alt="Logo" class="img-circle profile_img">
+        </div>
+                	<span>CMS</span>
+                
+        <div class="dist" >Lahore</div>
+        </a>
+      </div>
+     
+
+      <div class="clearfix"></div>
+
+      <!-- sidebar menu -->
+      <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+        <div class="menu_section">
+          <ul class="nav side-menu">     
+            
+
+                                    <li><a href="https://dsj.punjab.gov.pk/admin/dashboard"><i class="fa fa-dashboard"></i> Dashboard </a></li>
+            
+                        
+                        <li  class="current-page "><a href="https://dsj.punjab.gov.pk/admin/caseentries"><i class="fa fa-briefcase"></i> Case</a></li>    
+                        <!--
+            <li><a href="https://dsj.punjab.gov.pk/admin/suretybonds"><i class="fa fa-file-text"></i> Surety Bond </a></li>    
+            -->
+                        <li  class="  "><a href="https://dsj.punjab.gov.pk/admin/reports/causelist"><i class="fa fa-list-alt"></i> Cause List </a></li>
+            <li  class="  " ><a href="https://dsj.punjab.gov.pk/admin/reports"><i class="fa fa-file-text-o"></i> Reports </a></li>
+           
+            <li class=" "><a><i class="fa fa-calendar"></i> Calendar <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style=" ">
+               <li class=""><a href="https://dsj.punjab.gov.pk/admin/calendar/calendardatewise"><i class="fa fa-calendar-o"></i>Calendar </a></li>   
+               <li class=""><a href="https://dsj.punjab.gov.pk/admin/calendar/calendardetail"><i class="fa fa-calendar-o"></i>Case Calendar </a></li>   
+              </ul>
+            </li>
+            
+                        
+            
+            <li  class=""><a href="https://dsj.punjab.gov.pk/admin/suretybonds"><i class="fa fa-circle-o-notch"></i> Surety Bond </a></li> 
+            
+            <li class="       "><a><i class="fa fa-cog"></i> User Settings <span class="fa fa-chevron-down"></span></a>
+              <ul class="nav child_menu" style="        " >
+                <li class=""><a href="https://dsj.punjab.gov.pk/admin/usercasecategories"> Categories </a></li>    
+                <li class=""><a href="https://dsj.punjab.gov.pk/admin/usercasesubcategories">Subcategories </a></li>    
+                <li class=""><a href="https://dsj.punjab.gov.pk/admin/userstages"> Stages </a></li>    
+                <li class=""><a href="https://dsj.punjab.gov.pk/admin/userpolicestations"> Police Stations </a></li>    
+                <li class=""><a href="https://dsj.punjab.gov.pk/admin/userdefineheadings"> Custom Headings </a></li>
+                
+                                    <li class=""><a href="https://dsj.punjab.gov.pk/admin/options/2064/edit"> Options </a></li>   
+                              </ul>
+            </li>
+            
+            
+            
+                      <li><a href="https://dsj.punjab.gov.pk/admin/exportexcel"><i class="fa fa-file-excel-o"></i> Export </a></li>
+          
+			    			
+
+                      
+            
+            
+            
+                        
+                         
+
+                         
+            
+            
+                        
+           
+
+            			
+			
+			            
+      
+                    
+                
+                    
+                
+        
+        
+            
+    
+                    
+                
+                
+        
+                
+                  <li class=""><a href="https://dsj.punjab.gov.pk/admin/depositfee"><i class="fa fa-money"></i> Deposit Fee </a></li>
+          <li  class=""><a href="https://dsj.punjab.gov.pk/admin/depositfeereports/reports"><i class="fa fa-file-text-o"></i> Reports (Deposit) </a></li>
+                
+
+        
+                
+        
+
+
+        
+            
+          </ul>
+        </div>
+      </div>
+      <!-- /sidebar menu -->
+
+      
+    </div>
+  </div>
+  <!-- End menu bar -->      <!-- /Left Menu Bar -->
+
+      <!-- top navigation -->
+      <!-- top navigation -->
+  <div class="top_nav no-print">
+    <div class="nav_menu">
+      <nav>
+        <div class="nav toggle">
+          <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+        </div>
+        
+
+        <ul class="nav navbar-nav navbar-right" style="color: #000;">
+            <li class="">
+            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              Muhammad Shahzaib
+              <span class=" fa fa-angle-down"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-usermenu pull-right">
+              <li><a href="https://dsj.punjab.gov.pk/auth/changePassword"><i class="fa fa-key pull-right"></i>Change Password</a></li>
+              <li>
+                <a href="https://dsj.punjab.gov.pk/auth/logout" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"><i class="fa fa-sign-out pull-right"></i>Log Out</a>
+  
+                <form id="logout-form" action="https://dsj.punjab.gov.pk/auth/logout" method="POST" style="display: none;">
+                <input type="hidden" name="_token" value="JqXVSqQjC8kNSvaa7pkOnAf9T7iGhlLdssG1xlnJ">
+                </form>
+
+              </li>
+           
+            </ul>
+          </li>
+          
+                         
+            
+            <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                                              <i class="fa fa-bell-o"></i>
+                      <span class="badge bg-green">11</span>
+                                      </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                        <li>
+                        <span class="message">
+                                                  File Case No. <strong>274700225</strong> Titled <strong>"ATTIQ AKRAM  VS  ARSLAN ETC"</strong> has been received on 26-01-2026 11:26:04 AM from the court of <strong>Mr. Muhammad Imran Yousaf, CJ-I</strong> for <strong>03-02-2026</strong>.
+                        </span>
+                    </li>
+
+                                                              <li>
+                        <span class="message">
+                                                  File Case No. <strong>208377925</strong> Titled <strong>"Basharat Ahmad  VS  Muzamil hussain"</strong> has been received on 26-01-2026 11:25:27 AM from the court of <strong>Mr. Muhammad Imran Yousaf, CJ-I</strong> for <strong>02-02-2026</strong>.
+                        </span>
+                    </li>
+
+                                                              <li>
+                        <span class="message">
+                                                  File Case No. <strong>227945125</strong> Titled <strong>"IRFAN AHMAD BUTT  VS  SECRETARY TRANSPORT AUTHORITY ETC"</strong> has been received on 26-01-2026 11:24:49 AM from the court of <strong>Mr. Muhammad Imran Yousaf, CJ-I</strong> for <strong>02-02-2026</strong>.
+                        </span>
+                    </li>
+
+                                                              <li>
+                        <span class="message">
+                                                  File Case No. <strong>255317325</strong> Titled <strong>"QASIM  VS  ABID ALI ETC"</strong> has been received on 26-01-2026 11:24:31 AM from the court of <strong>Mr. Muhammad Imran Yousaf, CJ-I</strong> for <strong>03-02-2026</strong>.
+                        </span>
+                    </li>
+
+                                                              <li>
+                        <span class="message">
+                                                  File Case No. <strong>262513725</strong> Titled <strong>"Arif Ali  VS  Amanat etc"</strong> has been received on 26-01-2026 11:24:09 AM from the court of <strong>Mr. Muhammad Imran Yousaf, CJ-I</strong> for <strong>03-02-2026</strong>.
+                        </span>
+                    </li>
+
+                                          
+                                          <li>
+                        <div class="text-center">
+                          <a href="https://dsj.punjab.gov.pk/admin/notifications/notify_show">
+                            <i class="fa fa-angle-left"></i>
+                            <strong>See All Notifications</strong>
+                            <i class="fa fa-angle-right"></i>
+                          </a>
+                        </div>
+                      </li>
+                                      </ul>
+                </li>
+                              
+                
+                
+                
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- /top navigation -->  
+      <!-- /top navigation -->  
+      
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+
+        <div class="page-title clearfix">
+	<h4 id="page_title">Case</h4>
+	  <div class="title_left">
+		<!--<h5>  </h5>-->
+	  </div>
+	</div>
+     
+	
+	<!--
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Examples</li>
+    </ol>
+    -->        <div class="clearfix"></div>
+        
+         
+        <div class="clearfix"></div>
+
+        
+
+<div class="row">
+<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="x_panel">
+    <div class="tabs-content margin-top">
+      <ul class="nav nav-tabs">
+        <li><a href="https://dsj.punjab.gov.pk/admin/caseentries">Search Case</a></li>
+        <li class="active"><a data-toggle="tab" href="#create-case">Institute Case</a></li>
+      </ul>
+
+    <form method="POST" action="https://dsj.punjab.gov.pk/admin/caseentries" accept-charset="UTF-8" id="frm_caseentry" class="form-horizontal form-label-left"><input name="_token" type="hidden" value="JqXVSqQjC8kNSvaa7pkOnAf9T7iGhlLdssG1xlnJ">
+    <input type="hidden" name="e_id" id="e_id" value="0" />
+    <div class="tab-content">
+    <!-- Tab 1 -->
+    <div id="search-case" class="tab-pane fade">
+    </div>
+    <!-- Tab 1 End-->
+
+    <!-- Tab 2 -->
+    <div id="create-case" class="tab-pane fade in active">
+      <div class="container">
+        <!-- SmartWizard html -->
+        <div id="smartwizard" style="display:none;">
+            <ul>
+                <li><a href="#step-1">Basic Details</a></li>
+                <li><a href="#step-2">Criminal/Civil Information</a></li>
+                <li><a href="#step-3">Proceedings</a></li>
+            </ul>
+            
+            <div>
+             
+                <div id="step-1" class="">    
+                <div class="form-section-1">
+                
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                    		                        <label for="" class="control-label required">Judge Name</label>
+    	                    <select class="form-control" id="court_id" required="" data-parsley-group="block-1" name="court_id"><option value="2064">Mr. Kashif, Civil Judge Ist Class/Judicial Magistrate Section-30, Lahore</option></select>
+                                            </div>
+                    
+                    	<div class="col-md-6 col-sm-6 col-xs-12 form-group" >
+                    	<label for="" class="control-label required">District</label>
+                        <select class="form-control" id="ce_dist_id" required="" data-parsley-group="block-1" name="ce_district_id"><option value="24">Lahore</option></select>
+	                    </div> 
+                    
+                     <div class="col-md-6 col-sm-6 col-xs-12 form-group" >
+                    	<label for="" class="control-label required">Tehsil</label>
+                        <select class="form-control" id="ce_tehsil_id" required="" data-parsley-group="block-1" name="ce_tehsil_id"><option value="" selected="selected">Please Select Tehsil</option><option value="81">Lahore</option><option value="82">Sangla Hill</option><option value="83">Shah Kot</option></select>
+                    </div> 
+                        
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                        <label for="" class="control-label required">Case Title</label>
+                        <div class="input-group" style="margin-bottom: 0px;">
+                            <input class="form-control" placeholder="" id="ce_casetitle_eng1" required="" maxlength="255" tabindex="1" data-parsley-group="block-1" data-parsley-errors-container="#title-eng-1" onfocusout="text_translate(&quot;#ce_casetitle_eng1&quot;,&quot;#ce_casetitle_urdu2&quot;)" name="ce_casetitle_eng1" type="text" value="">
+                            <span class="input-group-addon" >VS</span>
+                            <input class="form-control" placeholder="" id="ce_casetitle_eng2" required="" maxlength="255" tabindex="2" data-parsley-group="block-1" data-parsley-errors-container="#title-eng-2" onfocusout="text_translate(&quot;#ce_casetitle_eng2&quot;,&quot;#ce_casetitle_urdu1&quot;)" name="ce_casetitle_eng2" type="text" value="">
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="title-eng-1"></div>
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="title-eng-2"></div>
+                        
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                        <label for="" class="control-label required urdu-font-18 text-align-urdu">عنوان</label>
+                        <div class="input-group" style="margin-bottom: 0px;">
+                            <input class="form-control" placeholder="" onfocus="setEditor(this)" required="" maxlength="255" tabindex="4" data-parsley-group="block-1" data-parsley-errors-container="#title-urdu-1" id="ce_casetitle_urdu1" name="ce_casetitle_urdu1" type="text" value="">
+                            <script type=text/javascript>makeUrduEditor('ce_casetitle_urdu1', 20);</script>
+                            <span class="input-group-addon urdu-font-18">بنام</span>
+                            <input class="form-control" placeholder="" onfocus="setEditor(this)" required="" maxlength="255" tabindex="3" data-parsley-group="block-1" data-parsley-errors-container="#title-urdu-2" id="ce_casetitle_urdu2" name="ce_casetitle_urdu2" type="text" value="">
+                            <script type=text/javascript>makeUrduEditor('ce_casetitle_urdu2', 20);</script>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="title-urdu-1"></div>
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="title-urdu-2"></div>
+                    </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12 form-group row">
+                            <label for="" class="control-label required">Institution Date</label>
+                            <div class='input-group date' id='ce_instdate'>
+                            <input class="form-control" placeholder="DD-MM-YYYY" data-date-format="DD-MM-YYYY" data-inputmask="&#039;mask&#039;: &#039;99-99-9999&#039;" tabindex="5" required="" data-parsley-group="block-1" name="ce_institutiondate" type="text" value="28-01-2026">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            </div>
+                        </div>
+            
+                        <div class="col-md-3 col-sm-6 col-xs-12 form-group" >
+                            <label for="" class="control-label required">Institution No</label>
+                            <input class="form-control" placeholder="" required="" data-parsley-type="digits" tabindex="6" data-parsley-group="block-1" name="ce_institutionno" type="text">
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label required urdu-font-16"> (اہلمد)&nbsp;&nbsp; . Case No </label>
+                            <input class="form-control" placeholder="" required="" data-parsley-type="digits" tabindex="7" data-parsley-group="block-1" name="ce_casecourtno" type="text">
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label required">Court Date</label>
+                            <div class='input-group date' id='ce_courtdate'>
+                            <input class="form-control" placeholder="DD-MM-YYYY" data-date-format="DD-MM-YYYY" data-inputmask="&#039;mask&#039;: &#039;99-99-9999&#039;" required="" tabindex="8" data-parsley-group="block-1" name="ce_casecourtdate" type="text" value="28-01-26">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            </div>
+                        </div>
+						<div class="clear"></div>
+                    
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label required">Category</label>
+                            <select class="form-control" id="casecategory_id" required="" tabindex="9" data-parsley-group="block-1" name="casecategory_id"><option value="" selected="selected">Select Case Category</option><option value="24">Application for Succession Certificate - Civil</option><option value="71">Application u/s 12(2) of CPC (C) - Civil</option><option value="72">Applications for Restoration of Suit/Applications - Civil</option><option value="73">Applications for Setting-aside Ex-Parte Decrees/Orders (C) - Civil</option><option value="43">Bail Application (M) - Magistrate</option><option value="74">Civil Misc. (C) - Civil</option><option value="70">Contempt of Court (C) - Civil</option><option value="25">Execution Petition (C) - Civil</option><option value="23">Family Cases - Civil</option><option value="30">Inquiries (C) - Civil</option><option value="36">Ist Class Cases under PPC - Magistrate</option><option value="38">Minor Offences - Magistrate</option><option value="34">Other Cases (C) - Civil</option><option value="40">Other Cases (M) - Magistrate</option><option value="2">Other Sessions Cases - Sessions</option><option value="22">Regular Civil Suit - Civil</option><option value="35">Sections 30 Cases under PPC - Magistrate</option></select>
+                        </div>
+						
+                        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label required">Subcategory</label>
+                            <select class="form-control" name="casesubcategory_id" id="casesubcategory_id" data-parsley-group="block-1", required="" disabled="" tabindex="10"><option value="">Select Case Sub Category</option></select>
+                        </div>
+
+
+
+                        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label required">Fortnightly Statement</label>
+                            <select class="form-control" required="" tabindex="11" data-parsley-group="block-1" name="fortnightly_id"><option value="" selected="selected">Select Fortnightly Statement Category</option><option value="1">Time Fixed Bail Applications Magistrage (3 Days)</option><option value="2">Time Fixed Bail Applications Sessions court (5 Days)</option><option value="3">Cancellation of Bail (15 Days)</option><option value="4">Imprisonment upto 7 Years (6 Months)</option><option value="5">Imprisonment above 7 Years Including Death Sentence (1 Year)</option><option value="6">Preventive Detention Cases (As early as possible)</option><option value="7">Transfer Applicatons u/s 526, 528, Cr.P.C (7 Days)</option><option value="8">Misc Application i.e Superdari, Disposal of Property etc (7 Days)</option><option value="9">Prioritized Narcotics Cases</option><option value="10">Criminal Revisions</option><option value="11">Anti Terrorism Cases</option><option value="12">Women Cases</option><option value="13">Juvenile Cases</option><option value="14">Cases of Overseas Pakistani (Either Complainant or Accused)</option><option value="15">Others - Criminal</option><option value="16">Time Fixed Stay Applications (15 Days)</option><option value="17">Rent Cases (4 Months)</option><option value="18">Appeals in rent Cases (2 Months)</option><option value="19">Revision Petitions (3 Months)</option><option value="20">Family Cases (3-6 Moths)</option><option value="21">Appeals in Family Cases (30 Days)</option><option value="22">Appeals Insolvency Cases (30 Days)</option><option value="23">Review Application (30 Days)</option><option value="24">Negotiable Instrument Cases u/s 37 CPC (90 Days)</option><option value="25">Cases of the Overseas Pakistanis (6 Months)</option><option value="26">Prioritized Women Cases</option><option value="27">Juvenile Cases</option><option value="28">Small Claims and Minor Offences</option><option value="29">Trade, Commercial, Investment</option><option value="30">Civil Execution Application</option><option value="31">Civil Suit</option><option value="32">Others - Civil</option></select>
+                        </div>
+                        </div>
+
+                        
+                        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label">Direction Issued From </label>
+                            <select class="form-control" tabindex="12" name="ce_directionfrom"><option value="0" selected="selected">No Direction</option><option value="1">Supreme Court</option><option value="2">Lahore High Court, Lahore</option><option value="3">Directorate of District Judiciary (DDJ)</option><option value="4">District &amp; Sessions Judge</option><option value="5">National Judicial Policy (NJP)</option><option value="6">Overseas of Pakistan Commission</option></select>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 col-xs-12 form-group" >
+                            <label for="" class="control-label">Direction (Letter No. &amp; Dated)</label>
+                            <input class="form-control" placeholder="" maxlength="255" tabindex="13" name="ce_directiondetail" type="text">
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label">Direction End Date</label>
+                            <div class='input-group date' id='ce_dirdate'>
+                            <input class="form-control" placeholder="DD-MM-YYYY" data-date-format="DD-MM-YYYY" data-inputmask="&#039;mask&#039;: &#039;99-99-9999&#039;" tabindex="14" name="ce_direction_upto" type="text">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="rows">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <label for="" class="control-label">This case includes:</label>
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                    <input class="" tabindex="15" name="ce_isjunevile" type="checkbox" value="1"> Juvenile
+                                </div>
+                              
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                    <input class="" tabindex="15" name="ce_isoverseas" type="checkbox" value="1"> Overseas
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <div class="rows">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <div class="control-label" >This case include <strong>Women</strong></div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                    <input class="" tabindex="15" name="ce_iswomen_1" type="checkbox" value="1"> Accused/ Petitioner/ Applicant
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                    <input class="" tabindex="15" name="ce_iswomen_2" type="checkbox" value="1"> Respondent/ Defendent
+                                </div>
+
+
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label">Govt. Department</label>
+                            <select class="form-control" tabindex="16" name="govtdepartment_id"><option value="5">Auqaf Department</option><option value="6">Board of Intermediate</option><option value="4">Board of Revenue</option><option value="19">Chief Settlement Commissioner</option><option value="20">Civil Aviation Authority</option><option value="40">DC</option><option value="38">Director General of Mines</option><option value="26">Education Deparment</option><option value="1">Excise and Taxation</option><option value="8">Federation of Pakistan</option><option value="30">Finance Department</option><option value="51">Forest Department</option><option value="25">Health Department</option><option value="23">Higher Education Commission</option><option value="14">Irrigation Department</option><option value="12">Lahore Cantonment Board</option><option value="33">Lahore Waste Management</option><option value="34">LDA</option><option value="42">LESCO</option><option value="56">Local Government &amp; Community Development</option><option value="55">Local Government / Union Council</option><option value="47">MDA</option><option value="48">MEPCO</option><option value="3">Metropolitian Corporation</option><option value="53">Municipal committee</option><option value="44">NADRA</option><option value="45">National Saving Center</option><option value="27">NHA</option><option value="0" selected="selected">Nil</option><option value="22">NTDC</option><option value="46">Overseas Pakistani Foundation</option><option value="37">Pakistan Engineering Council</option><option value="10">Pakistan Medicla and Dental Council</option><option value="2">Pakistan Railway</option><option value="17">Pakistan State Oil</option><option value="24">PHA</option><option value="50">PHATA</option><option value="7">PIA</option><option value="16">Post Master General</option><option value="9">Province of Punjab</option><option value="39">PTA</option><option value="18">PTCL</option><option value="15">Punjab Board of Liquidation</option><option value="28">Punjab Food Authority</option><option value="31">Punjab Health Care</option><option value="32">Punjab Police</option><option value="13">Punjab University</option><option value="29">State Life Insurance</option><option value="35">Sui Gass</option><option value="49">TDA</option><option value="52">TMA</option><option value="21">Total Parco</option><option value="54">Utility Store Corporation</option><option value="36">Walled City</option><option value="11">Walton Cantonment Board</option><option value="41">WAPDA</option><option value="43">WASA</option></select>
+                        </div>
+
+                        <div class="clear"></div>
+
+
+
+                        <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label">Connected Case (Main Case)</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <input type="checkbox" name="ce_isconnected" value="1"> </span> 
+                                <input class="form-control" placeholder="Case Connected With" data-parsley-type="digits" tabindex="17" data-parsley-group="block-1" name="ce_connectedwith" type="text">
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-6 col-xs-12 form-group">
+                            <label for="" class="control-label">Mouza (Area)</label>
+                            <input class="form-control" placeholder="" maxlength="255" tabindex="18" data-parsley-group="block-1" name="ce_moza" type="text">
+                        </div>
+
+                    
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                            <label for="" class="control-label">Remarks</label>
+                            <textarea class="form-control" placeholder="" maxlength="500" tabindex="19" data-parsley-group="block-1" name="ce_remarks" cols="30" rows="5"></textarea>
+                        </div>
+                
+                </div>
+                </div><!-- end step-1 -->
+
+
+                <div id="step-2" class="">
+                <div class="form-section">
+                    <h3>Criminal Detail</h3>
+                    <div class="clearfix">
+                    <!-- <h4>FIR/Private Complaint</h4> -->
+                        <div class=" form-group">
+                                <div class="col-md-2" style="color:#666;"> Case Type: </div>
+                                <div class="col-md-1"> <input id="ce_isfir" checked="checked" name="ce_isfir" type="radio" value="0"> NA</div>
+                                <div class="col-md-1"> <input id="ce_isfir" name="ce_isfir" type="radio" value="1"> FIR</div>
+                                <div class="col-md-2"><input id="ce_isfir" name="ce_isfir" type="radio" value="2"> Private Complaint</div>
+                        </div>
+
+                
+                    <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                        <label for="" class="control-label">FIR/Complaint No.</label>
+                        <input class="form-control" id="ce_firno" placeholder="" data-parsley-type="digits" data-parsley-group="block-2" name="ce_firno" type="text">
+                    </div>
+
+                    <div class="col-md-2 col-sm-2 col-xs-12 form-group">
+                        <label for="" class="control-label">FIR/Complaint Year</label>
+                        <input class="form-control" id="ce_firyear" placeholder="" data-parsley-type="digits" data-parsley-group="block-2" name="ce_firyear" type="text">
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                        <label for="" class="control-label">Offence</label>
+                        <input class="form-control" id="ce_offence" placeholder="" maxlength="255" data-parsley-group="block-2" name="ce_offence" type="text">
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+                        <label for="" class="control-label">Police Station</label>
+                        <select class="form-control" id="policestation_id" name="policestation_id"><option value="" selected="selected">Select Police Station</option><option value="633">Barra Ghar</option><option value="636">City Shahkot</option><option value="902">Crime Control Department</option><option value="637">Model Town</option><option value="638">Ichara</option><option value="639">Lahore</option><option value="643">Garhi Shahu</option></select>
+                    </div>
+               
+                    <div class="clear"></div>
+                    <div class="col-md-12">
+                    <label for="" class="control-label">Report u/s 173 Cr.P.C</label>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <!-- <div class="col-md-3 font-16"> Report u/s 173 Cr.P.C :: </div> -->
+                        <div class="col-md-1" style="margin-left: -10px;"> <input checked="checked" name="ce_challanstatus" type="radio" value="N/A"> NA</div>
+                        <div class="col-md-2"> <input name="ce_challanstatus" type="radio" value="Not Submitted"> Not Submitted</div>
+                        <div class="col-md-2"><input name="ce_challanstatus" type="radio" value="Supplementary"> Supplementary</div>
+                        <div class="col-md-2"><input name="ce_challanstatus" type="radio" value="Incomplete"> Incomplete</div>
+                        <div class="col-md-2"><input name="ce_challanstatus" type="radio" value="Complete"> Complete</div>
+
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class='input-group date' id="ce_challandated">
+                            <input class="form-control" placeholder="DD-MM-YYYY" data-date-format="DD-MM-YYYY" data-inputmask="&#039;mask&#039;: &#039;99-99-9999&#039;" name="ce_challandated" type="text">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                 </div>
+                 
+                 <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <label for="" class="control-label">Is Undertrial Prisoner</label>
+                    <select class="form-control" name="ce_isutp"><option value="1">Yes</option><option value="0" selected="selected">No</option></select>
+                 </div>
+                 
+                 <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <label for="" class="control-label">Is PFSA Report Received</label>
+                    <select class="form-control" name="ce_ispfsa"><option value="1">Yes</option><option value="0" selected="selected">No</option></select>
+                 </div>
+
+
+                </div>
+
+                <h3>Civil Detail</h3>
+                <h4>Appellate Jurisdiction (Appeal/Revision)</h4>
+
+                <div class="col-md-2 col-sm-12 col-xs-12 form-group">
+                <label for="" class="control-label">Case No. (Lower Court)</label>
+                <input class="form-control" placeholder="" name="ce_caseno_lowercourt" type="text">
+                </div>
+                
+                <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <label for="" class="control-label">Appeal Against</label>
+                    <select class="form-control" name="ce_appeal_against"><option value="" selected="selected"></option><option value="Interim Order">Interim Order</option><option value="Final Order">Final Order</option></select>
+                </div>
+
+
+                <!-- <h4>Appellate Jurisdiction (Appeal/Revision)</h4> -->
+                <div class="col-md-2 col-sm-6 col-xs-12 form-group">
+                    <label for="" class="control-label">Order Dated</label>
+                    <div class='input-group date' id='ce_orderdated'>
+                    <input class="form-control" placeholder="DD-MM-YYYY" data-date-format="DD-MM-YYYY" data-inputmask="&#039;mask&#039;: &#039;99-99-9999&#039;" name="ce_orderdated" type="text" value="">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                <label for="" class="control-label">Order By</label>
+                <input class="form-control" placeholder="" name="ce_orderby" type="text" value="">
+                </div>
+
+                <div class="clear"></div>
+
+                <!-- <h4>Lower Court</h4> -->
+                
+                <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label for="" class="control-label">Stay Granted</label>
+                    <select class="form-control" name="ce_staygranted"><option value="1">Yes</option><option value="0" selected="selected">No</option></select>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12 form-group" style="margin-bottom: 15px;">
+	                <label for="" class="control-label">Suit Valuation</label>
+    	            <input class="form-control" placeholder="" data-parsley-type="digits" data-parsley-group="block-2" name="ce_suitvaluation" type="text">
+                </div>
+                
+                <div class="col-md-4 col-sm-6 col-xs-12 form-group">
+                    <label for="" class="control-label">Civil Jurisdiction (Class-I-II-III)</label>
+                    <select class="form-control" data-parsley-group="block-2" name="ce_civil_jurisdiction"><option value="0" selected="selected">Select Civil Jurisdiction</option><option value="1">Class-I</option><option value="2">Class-II</option><option value="3">Class-III</option></select>
+                </div>
+
+
+            </div>
+            	</div><!-- end step-2 -->
+
+            	<!-- step-3 -->
+            	<div id="step-3" class="">
+            	<div class="form-section">
+                <h3>Case Proceeding</h3>
+                <div class="clearfix" >
+                    <div class="row" style="margin-top: 10px;">
+                                    
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12 form-group" >
+                            <label for="" class="control-label">Case Status</label>
+                            <select class="form-control" id="ce_casestatus" name="ce_casestatus"><option value="0" selected="selected">Pending</option></select>
+                        </div>
+                     </div>
+
+                    <div class="col-md-12">
+                       
+                            <div class='col-md-6 col-sm-6 col-xs-12 form-group'>
+                                <label for="" class="control-label required">Next Date</label>
+                                <div class='input-group date' id='cp_nextdate' style="margin-bottom: 0px;">
+                                        <input class="form-control" placeholder="DD-MM-YYYY" data-date-format="DD-MM-YYYY" data-inputmask="&#039;mask&#039;: &#039;99-99-9999&#039;" required="" data-parsley-group="block-3" data-parsley-errors-container="#nextdate" name="cp_nextdate" type="text">
+                                        <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12" id="nextdate"></div>
+                            </div>
+                       
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                    <label for="" class="control-label required">Case Stage</label>
+                                    <select class="form-control" id="cstage" required="" data-parsley-group="block-3" name="stage_id"><option value="" selected="selected">Please Select Case Stage</option><option value="127">Police Custody</option><option value="97">Summon for Record</option><option value="19">Further Proceedings &amp; Appropriate Order</option><option value="76">Documentary Proof</option><option value="95">Summon for Accused</option><option value="8">Argument</option><option value="54">Reply of Application</option><option value="46">Evidence of Plaintiff</option><option value="80">Ex-Parte Evidence</option><option value="52">Evidence</option><option value="16">Evidence of Prosecution</option><option value="65">Arguments on Application</option><option value="10">Notice</option><option value="24">Requisitioning Complete Challan</option><option value="44">Evidence of Defendant</option><option value="48">Cross Examination of Witnesses</option><option value="131">Fresh Challan</option><option value="55">Alongwith Conected Case File</option><option value="20">Summoning For Witness</option><option value="5">Framing of Charge</option><option value="25">Final Arguments</option><option value="37">Compromise</option><option value="18">Statement Of Accused U/S 342 Crpc</option><option value="71">Reply of Suit</option><option value="96">Warrant of Accused</option><option value="38">Proclamation</option><option value="78">Cursory Evidence</option><option value="75">Awaiting For Reports</option><option value="57">Amended Appeal/Plaint</option><option value="39">Comments/Report</option><option value="30">Summon</option><option value="9">For Order</option><option value="114">Amended Written Statement</option><option value="11">Written Statement</option><option value="32">Awaiting Order of District Court (Civil)</option><option value="12">Pre-Trial Reconciliation</option><option value="28">Evidence of Petitioner</option><option value="94">Ex-Parte Arguments</option><option value="34">Warrant Bailable</option><option value="23">Alongwith Private Complaint Case</option><option value="66">Deposit of Court Fee</option><option value="92">Interrogatories</option><option value="31">Preliminary Arguments</option><option value="130">Arguments on Maintainability of Suit</option><option value="119">Submission of Document</option><option value="83">Deposit of Zar e Soom</option><option value="73">Submission Power of Attorney</option><option value="14">Attendance</option><option value="116">Submission of List of Witnesses</option><option value="72">Submission List of Legal Heir</option><option value="125">Appointment of Refree</option><option value="140">Arguments on Stay Application</option></select>
+                            </div>
+                      
+                    </div>
+                    
+                    <div class="col-md-12">
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                    <label for="" class="control-label ">Adjournment Resaon</label>
+                                    <select class="form-control" required="" data-parsley-group="block-3" name="adjournmenttype_id"><option value="">Please Select Case Adjournment</option><option value="26">Awaiting Order of Appellate Court</option><option value="27">Awaiting Order of Superior Court</option><option value="31">Awaiting Report of Baliff</option><option value="29">Awaiting Report of Court Auctioner</option><option value="28">Awaiting Report of Local Commission</option><option value="30">Awaiting Report of Warrant Possession</option><option value="11">Death of Accused</option><option value="48">Death of Appellant</option><option value="10">Death of Complainant</option><option value="12">Death of Counsel</option><option value="46">Death of Defendant</option><option value="45">Death of Petitioner</option><option value="44">Death of Plaintiff</option><option value="47">Death of Respondent</option><option value="17">Declared Holiday</option><option value="18">InCompelation Investigation</option><option value="20">Misc.</option><option value="0" selected="selected">Nil</option><option value="5">Non Availability of Counsel Accused</option><option value="49">Non Availability of Counsel Appellant</option><option value="4">Non Availability of Counsel Complainant</option><option value="38">Non Availability of Counsel Defendant</option><option value="54">Non Availability of Counsel of Both Parties</option><option value="37">Non Availability of Counsel Petitioner</option><option value="36">Non Availability of Counsel Plaintiff</option><option value="39">Non Availability of Counsel Respondent</option><option value="56">Non Availability of District Attorney</option><option value="53">Non Availability of Public Prosecutor</option><option value="19">Non Availability of Record</option><option value="50">Non Availability/Appearance of Appellant</option><option value="6">Non Availability/Appearance of Complainant</option><option value="41">Non Availability/Appearance of Petitioner</option><option value="40">Non Availability/Appearance of Plaintiff</option><option value="7">Non Availability/Production of Accused</option><option value="9">Non Availability/Production of Case Property</option><option value="42">Non Availability/Production of Defendant</option><option value="43">Non Availability/Production of Respondent</option><option value="8">Non Availability/Production of Witnesses</option><option value="21">Non Deposit of Court Fee</option><option value="25">Non Deposit of Decreetal Amount</option><option value="22">Non Deposit of Process Fee</option><option value="24">Non Deposit of Proclamation Fee</option><option value="23">Non Deposit of Reply/Written Statement</option><option value="3">On Request of Accused Party</option><option value="51">On Request of Appellant Party</option><option value="1">On Request of Both Parties</option><option value="2">On Request of Complainant Party</option><option value="34">On Request of Defendant Party</option><option value="55">On Request of District Attorney</option><option value="33">On Request of Petitioner Party</option><option value="32">On Request of Plaintiff Party</option><option value="52">On Request of Public Prosecutor</option><option value="35">On Request of Respondent Party</option><option value="13">Presiding Officer on Leave</option><option value="15">Presiding Officer on Training</option><option value="14">Presiding Officer Transferred</option><option value="16">Strike of Bar</option></select>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <label for="" class="control-label">Custom Heading</label>
+                                <select class="form-control" id="ce_userdefineheading" name="userdefineheading_id"><option value="" selected="selected">Select Custom Heading (Optional)</option><option value="36643">Oldest Cases</option><option value="31224">Accused Absent</option><option value="37229">Summons of Record</option><option value="37226">Summon</option><option value="37228">Notice</option><option value="37225">Proclamation</option><option value="37227">Written Statement</option><option value="37230">Amended Plaint</option><option value="37231">Written Amended statment</option><option value="37238">Summoning list of witnesses</option><option value="37239">Submission list of legal heirs</option><option value="37232">Reply of Application</option><option value="37236">Argument upon application</option><option value="37234">Preliminary Argument</option><option value="37233">Argument</option><option value="37237">Further Proceedings</option><option value="37240">Summon of Accused</option><option value="37235">Evidence</option></select>
+                            </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                            <div class="col-md-6 col-sm-8 col-xs-12 form-group">
+                                    <label for="" class="control-label">Short Order</label>
+                                    <textarea class="form-control" placeholder="" maxlength="500" name="cp_shortorder" cols="30" rows="5"></textarea>
+                            </div>
+                        
+                            <div class="col-md-6 col-sm-8 col-xs-12 form-group">     
+                                        <label for="" class="control-label">Remarks</label>
+                                        <textarea class="form-control" placeholder="" maxlength="500" name="cp_remarks" cols="30" rows="5"></textarea>
+                            </div>
+                    </div>
+            </div>          
+            </div><!-- end step-3 -->
+
+        	</div><!-- end div -->
+    
+    </div><!-- End Smartwizard -->
+    </div><!-- End Container -->
+        
+        
+    </div><!-- Tab2 -->
+    </div><!-- Tab-Content -->
+    <!-- Tab 2 End -->
+
+    </form>
+
+    </div>
+      </div>
+
+</div><!--x-panel-->
+</div><!--col-->
+</div><!--row-->
+  
+
+
+          
+        </div> <!-- class -->
+      </div> <!-- right_col -->
+      <!-- /page content -->
+
+
+    <!-- footer content -->
+    <footer class="no-print">
+          <div class="pull-right">
+            <i>Case Management System - A collaboration of PITB and D&SJ Lahore.</i>
+          </div>
+          <div class="clearfix"></div>
+    </footer>
+    
+    <script>
+	function text_translate(from,to){
+		var english_text = $.trim($(from).val());
+		
+			if(english_text!=""){
+			
+				$.post('https://dsj.punjab.gov.pk/admin/caseentries/geturdu', {english_text:english_text,'_token':'JqXVSqQjC8kNSvaa7pkOnAf9T7iGhlLdssG1xlnJ'}, function (data) {
+							var obj = eval(data);
+							if (obj.status == 'success') {
+								$(to).val(obj.urdu_text);
+							}
+							
+						}, "json");
+				
+			}else {
+				$(to).val('');
+			}
+		
+	}
+	</script>    <!-- /footer content -->
+        
+      </div>
+    </div>
+
+    <script src="https://dsj.punjab.gov.pk/js/plugins/jquery/jquery.1.11.1.min.js"></script><script src="https://dsj.punjab.gov.pk/js/plugins/bootstrap/dist/js/bootstrap.min.js"></script><script src="https://dsj.punjab.gov.pk/js/plugins/fastclick/lib/fastclick.js"></script><script src="https://dsj.punjab.gov.pk/js/plugins/nprogress/nprogress.js"></script><script src="https://dsj.punjab.gov.pk/js/custom.js"></script>    <!-- Include SmartWizard JavaScript source -->
+<script src="https://dsj.punjab.gov.pk/js/jquery.smartWizard.min.js"></script>
+
+<script src="https://dsj.punjab.gov.pk/js/plugins/parsley/parsley.min.js"></script>
+<script src="https://dsj.punjab.gov.pk/js/plugins/moment/min/moment.min.js"></script>
+<script src="https://dsj.punjab.gov.pk/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<script src="https://dsj.punjab.gov.pk/js/plugins/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+<script src="https://dsj.punjab.gov.pk/js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="https://dsj.punjab.gov.pk/assets/select2/dist/js/select2.js"></script>
+<script src="https://dsj.punjab.gov.pk/js/pagescript/caseentry.js"></script>
+
+
+<!-- Wizard Jquery -->
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Smart Wizard
+        $('#smartwizard').smartWizard({ 
+                selected: 0, 
+                theme: 'default',
+                keyNavigation: false,
+                transitionEffect:'slide',
+                toolbarSettings: {toolbarPosition: 'both',
+                                  toolbarExtraButtons: [
+                                        {label: 'Save & Finish', css: 'btn-finish', id:'btn-finish', onClick: function()
+                                        { 
+                                            if($('#frm_caseentry').parsley().validate({block: 'block-3'}))
+                                            {
+                                              $(this).prop("disabled",true);
+                                              $("#frm_caseentry").submit();
+                                              return false;
+                                            }
+                                            return false;
+                                            
+                                            
+                                        }},
+                                       // {label: 'Cancel', css: 'btn-warning', onClick: function(){ $('#smartwizard').smartWizard("reset"); }}
+                                    ]
+                                }
+             });
+                                     
+        $('#smartwizard').smartWizard("theme", "arrows");
+        
+
+        // External Button Events
+        $("#reset-btn").on("click", function() {
+            // Reset wizard
+            $('#smartwizard').smartWizard("reset");
+            return true;
+        });
+        
+        $("#prev-btn").on("click", function() {
+            // Navigate previous
+            $('#smartwizard').smartWizard("prev");
+            return true;
+        });
+        
+        $("#next-btn").on("click", function() {
+            // Navigate next
+            $('#smartwizard').smartWizard("next");
+            return true;
+        });
+        
+
+        $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+         
+		 
+         if(stepNumber == 0)
+         {
+            if($('#frm_caseentry').parsley().validate({group: 'block-1'}))
+            {
+              //$('.btn-finish').prop('disabled', true);
+              return true;
+            }
+            return false;
+          }
+          else if(stepNumber == 1)
+          {
+            if($('#frm_caseentry').parsley().validate({group: 'block-2'}))
+            {
+              //if( stepDirection=='forward')
+              //  $('.btn-finish').prop('disabled', false);
+              //else
+              //  $('.btn-finish').prop('disabled', true);
+
+              return true;
+              
+            }
+            return false;
+          }
+          else if(stepNumber == 2)
+          {
+            if($('#frm_caseentry').parsley().validate({group: 'block-3'}))
+            {
+              //$('.btn-finish').prop('disabled', true);
+              return true;
+            }
+            return false;
+          }
+
+          //$('.btn-finish').prop('disabled', 'disabled');
+          //else if(stepNumber == 2 && stepDirection=='forward')
+          //{}
+
+        });
+
+
+        $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+
+        if($('button.sw-btn-next').hasClass('disabled')){
+            $('.sw-btn-group-extra').show(); // show the button extra only in the last page
+        }else{
+            $('.sw-btn-group-extra').hide();                
+        }
+
+      });
+
+        if($('button.sw-btn-next').hasClass('disabled')){
+            $('.sw-btn-group-extra').show(); // show the button extra only in the last page
+        }else{
+            $('.sw-btn-group-extra').hide();                
+        }
+
+
+        
+       $('#smartwizard').show(); 
+    });   
+</script>  
+  <!-- Wizard End -->
+  
+  <script type="text/javascript">
+
+    $(document).ready(function(){
+	
+		$('.select-basic-single').select2({
+		  theme: "classic",
+		  width: '100%'   
+		});
+        
+        if($('#casecategory_id').val() != "")
+        {
+			load_subcategory();
+        }
+
+        $('#casecategory_id').on('change', function(e){
+            load_subcategory();
+        });
+
+        function load_subcategory()
+        {
+            var distID = $('#ce_dist_id').val();
+			var courtID = $('#court_id').val();
+			var cateID = $('#casecategory_id').val();
+			
+            if(distID && courtID && cateID)
+            {
+                $('#casesubcategory_id').empty(); 
+                $("#casesubcategory_id").prop('disabled', '');
+                var APP_URL = "https:\/\/dsj.punjab.gov.pk";
+                $.getJSON(APP_URL +'/admin/caseentries/getcasesubcategory/'+distID+'/'+courtID+'/'+cateID, function(data, status){
+                    $.each(data, function(key, value) {  
+                        $('#casesubcategory_id').append($('<option>', { 
+                                value: value.id,
+                                text : value.casesubcate_name_eng
+                            }));
+                        
+                    });
+					$("#casesubcategory_id").val("").trigger("change");
+										//$("#pizza_kind").prop('disabled', 'disabled');
+                    //$('#jsubcategory_id').trigger("chosen:updated");
+                });
+
+            }
+            else
+            {
+                $('select[name="casesubcategory_id"]').empty();
+                $("#casesubcategory_id").prop('disabled', 'disabled');
+            }
+               
+        }
+		
+		
+		$("#ce_dist_id").change(function() {
+			var distID = $('#ce_dist_id').val();
+		
+			if(distID)
+			{
+			   $('#court_id').empty(); 
+			   
+				$('select[name="casecategory_id"]').empty();
+					$('#casecategory_id').append($('<option>', { value: "",	text : "Select Case Category" }));
+				$('select[name="casesubcategory_id"]').empty();
+					$('#casesubcategory_id').append($('<option>', { value: "",	text : "Select Case Sub-Category" }));
+				$('select[name="policestation_id"]').empty();
+					$('#policestation_id').append($('<option>', { value: "",	text : "Select Police Station" }));
+				$('select[name="cstage"]').empty();
+					$('#cstage').append($('<option>', { value: "",	text : "Select Stage" }));
+				$('select[name="ce_userdefineheading"]').empty();
+					$('#ce_userdefineheading').append($('<option>', { value: "",	text : "Select Custom Heading (Optional)" }));
+					
+				
+				//$("#casesubcategory_id").prop('disabled', '');
+				var APP_URL = "https:\/\/dsj.punjab.gov.pk";
+				$.getJSON(APP_URL +'/admin/caseentries/getjudgeslist/'+distID, function(data, status){
+				    $('#court_id').append($('<option>', { value: "",	text : "Please Select Judge Name" }));
+					$.each(data, function(key, value) {  
+						$('#court_id').append($('<option>', { 
+								value: value.court_id,
+								text : value.j_name_eng+", "+ value.jsubcate_name_eng+", "+value.dist_name_eng
+							}));
+						
+					});
+						//$("#pizza_kind").prop('disabled', 'disabled');
+						//$('#jsubcategory_id').trigger("chosen:updated");
+				});
+	
+			}
+			else
+			{
+				$('select[name="court_id"]').empty();
+				//$("#casesubcategory_id").prop('disabled', 'disabled');
+			}
+			
+    	});
+		
+		
+		$("#court_id").change(function() {
+			var distID = $('#ce_dist_id').val();
+			var courtID = $('#court_id').val();
+		
+			if(distID && courtID)
+			{
+			   $('#casecategory_id').empty(); 
+				//$("#casesubcategory_id").prop('disabled', '');
+				var APP_URL = "https:\/\/dsj.punjab.gov.pk";
+				$.getJSON(APP_URL +'/admin/caseentries/getcasecategorylist/'+distID+'/'+courtID, function(data, status){
+				    $('#casecategory_id').append($('<option>', { value: "",	text : "Select Case Category" }));
+					$.each(data, function(key, value) {  
+						$('#casecategory_id').append($('<option>', { 
+								value: value.id,
+								text : value.casecate_name_eng
+							}));
+						
+					});
+						//$("#pizza_kind").prop('disabled', 'disabled');
+						//$('#jsubcategory_id').trigger("chosen:updated");
+				});
+				
+				
+				
+				$('#policestation_id').empty(); 
+				//$("#casesubcategory_id").prop('disabled', '');
+				var APP_URL = "https:\/\/dsj.punjab.gov.pk";
+				$.getJSON(APP_URL +'/admin/caseentries/getpolicestationlist/'+distID+'/'+courtID, function(data, status){
+				    $('#policestation_id').append($('<option>', { value: "",	text : "Select Police Station" }));
+					$.each(data, function(key, value) {  
+						$('#policestation_id').append($('<option>', { 
+								value: value.id,
+								text : value.ps_name_eng
+							}));
+						
+					});
+						//$("#pizza_kind").prop('disabled', 'disabled');
+						//$('#jsubcategory_id').trigger("chosen:updated");
+				});
+				
+				
+				$('#cstage').empty(); 
+				//$("#casesubcategory_id").prop('disabled', '');
+				var APP_URL = "https:\/\/dsj.punjab.gov.pk";
+				$.getJSON(APP_URL +'/admin/caseentries/getstagelist/'+distID+'/'+courtID, function(data, status){
+				    $('#cstage').append($('<option>', { value: "",	text : "Select Stage" }));
+					$.each(data, function(key, value) {  
+						$('#cstage').append($('<option>', { 
+								value: value.id,
+								text : value.stg_name_eng
+							}));
+						
+					});
+						//$("#pizza_kind").prop('disabled', 'disabled');
+						//$('#jsubcategory_id').trigger("chosen:updated");
+				});
+				
+				
+				$('#ce_userdefineheading').empty(); 
+				//$("#casesubcategory_id").prop('disabled', '');
+				var APP_URL = "https:\/\/dsj.punjab.gov.pk";
+				$.getJSON(APP_URL +'/admin/caseentries/getuserdefineheadinglist/'+distID+'/'+courtID, function(data, status){
+				    $('#ce_userdefineheading').append($('<option>', { value: "",	text : "Select Custom Heading (Optional)" }));
+					$.each(data, function(key, value) {  
+						$('#ce_userdefineheading').append($('<option>', { 
+								value: value.id,
+								text : value.heading_name_eng
+							}));
+						
+					});
+						//$("#pizza_kind").prop('disabled', 'disabled');
+						//$('#jsubcategory_id').trigger("chosen:updated");
+				});
+			}
+			else
+			{
+				$('select[name="casecategory_id"]').empty();
+					$('#casecategory_id').append($('<option>', { value: "",	text : "Select Case Category" }));
+				$('select[name="casesubcategory_id"]').empty();
+					$('#casesubcategory_id').append($('<option>', { value: "",	text : "Select Case Sub-Category" }));
+				$('select[name="policestation_id"]').empty();
+					$('#policestation_id').append($('<option>', { value: "",	text : "Select Police Station" }));
+				$('select[name="cstage"]').empty();
+					$('#cstage').append($('<option>', { value: "",	text : "Select Stage" }));
+				$('select[name="ce_userdefineheading"]').empty();
+					$('#ce_userdefineheading').append($('<option>', { value: "",	text : "Select Custom Heading (Optional)" }));
+					
+				
+			}
+			
+    	});
+		
+		
+		
+/*		
+		$("#court_id").change(function() {
+			var distID = $('#ce_dist_id').val();
+			var courtID = $('#court_id').val();
+		
+			if(distID && courtID)
+			{
+			   $('#policestation_id').empty(); 
+				//$("#casesubcategory_id").prop('disabled', '');
+				var APP_URL = "https:\/\/dsj.punjab.gov.pk";
+				$.getJSON(APP_URL +'/admin/caseentries/getcasecategorylist/'+distID+'/'+courtID, function(data, status){
+				    $('#policestation_id').append($('<option>', { value: "",	text : "Select Police Station" }));
+					$.each(data, function(key, value) {  
+						$('#policestation_id').append($('<option>', { 
+								value: value.id,
+								text : value.ps_name_eng
+							}));
+						
+					});
+						//$("#pizza_kind").prop('disabled', 'disabled');
+						//$('#jsubcategory_id').trigger("chosen:updated");
+				});
+			}
+			else
+			{
+				$('select[name="policestation_id"]').empty();
+				//$("#casesubcategory_id").prop('disabled', 'disabled');
+			}
+			
+    	});
+*/		
+		
+		
+		
+
+
+     });
+
+    
+
+    </script>
+  
+  </body>
+</html>
