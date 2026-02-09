@@ -1,6 +1,8 @@
 ssh -p 65002 u442793684@109.106.251.30
 AAaa11@@AAopen2code.com
 
+
+DOne this section
 Fortnightly Statement removed
 Direction (Letter No. & Dated) removed
 Direction End Date removed
@@ -8,7 +10,7 @@ Connected Case (Main Case) remvoed
 Mouza (Area) remvoed
 Remarks remvoed
 
-a
+
 
 proceeding > Entrusted to court
 Institution No auto grab  from system 
