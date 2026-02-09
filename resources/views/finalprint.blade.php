@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Case Receipt</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     @media print {
-      body, html {
+
+      body,
+      html {
         margin: 0;
         padding: 0;
         width: 210mm;
@@ -249,6 +252,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <div class="header">
@@ -258,41 +262,48 @@
         <div class="header-sub">INSTITUTION MANAGEMENT SYSTEM, {{$case->u($case->user_id)->ctype}}, {{$case->u($case->user_id)->tehsil}}</div>
       </div> -->
     </div>
-<div class="thumb-sign-label" style="text-align:left !important">Picture of Petitioner/ Plaintiff</div>
+
+    <div class="thumb-sign-label" style="text-align:left !important">Picture of Petitioner/ Plaintiff</div>
     <div class="photo-qr-container">
       <div class="photo-qr-wrapper">
         <div class="photo-box mb-1">
-            
-          <img src="https://diary.dsjmuzaffargarh.com/storage/app/{{$case->pic}}" alt="Photo" style="width: 100%; height: 100%; object-fit: fill; filter: brightness(2);">
+
+          <img src="{{ asset('public/' . $case->pic) }}" alt="Photo"
+            style="width: 100%; height: 100%; object-fit: fill; filter: brightness(2);">
         </div>
       </div>
       <div class="qr-box">
         {!! $qrCode !!}
       </div>
     </div>
-<div class="thumb-sign-label">Thumb Impressions & Signatures of Petitioner/ Plaintiff</div>
+    <div class="thumb-sign-label">Thumb Impressions & Signatures of Petitioner/ Plaintiff</div>
     <div class="thumb-sign-line" style="margin-top:0px !important;"></div>
-    
+
 
     <div class="form-grid">
       <div>
         <label>Institution No:</label> @php
-    $user = $case->u($case->user_id);
-@endphp
+          $user = $case->u($case->user_id);
+        @endphp
 
-@if ($user->ctype == "CIVIL COURTS")
-    <input type="text" value="PB\MZG\C.C-No. {{$case->i_no}}/2025" readonly class="line-input">
-@else
-    <input type="text" value="PB\MZG\SC.C-No. {{$case->i_no}}/2025" readonly class="line-input">
-@endif
-        <label>Category of Case:</label> <input type="text" value="{{$case->cname($case->cat)}}" readonly class="line-input">
-        <label>Sub Category:</label> <input type="text" value="{{$case->sname($case->subcat)}}" readonly class="line-input">
+        @if ($user->ctype == "CIVIL COURTS")
+          <input type="text" value="C.C-No. {{$case->i_no}}/2025" readonly class="line-input">
+        @else
+          <input type="text" value="SC.C-No. {{$case->i_no}}/2025" readonly class="line-input">
+        @endif
+        <label>Category of Case:</label> <input type="text" value="{{$case->cname($case->cat)}}" readonly
+          class="line-input">
+        <label>Sub Category:</label> <input type="text" value="{{$case->sname($case->subcat)}}" readonly
+          class="line-input">
         <label>Jurisdiction of Case:</label> <input type="text" value="{{$case->jur}}" readonly class="line-input">
-        <label>Date of Institution:</label> <input type="text" value="{{ \Carbon\Carbon::parse($case->i_date)->format('d-m-Y') }}" readonly class="line-input">
-        <label>Date of Appearance:</label> <input type="text" value="{{ \Carbon\Carbon::parse($case->a_date)->format('d-m-Y') }}" readonly class="line-input">
+        <label>Date of Institution:</label> <input type="text"
+          value="{{ \Carbon\Carbon::parse($case->i_date)->format('d-m-Y') }}" readonly class="line-input">
+        <label>Date of Appearance:</label> <input type="text"
+          value="{{ \Carbon\Carbon::parse($case->a_date)->format('d-m-Y') }}" readonly class="line-input">
         <label>Presented By:</label> <input type="text" value="{{$case->pby}}" readonly class="line-input">
         <label>Court Room No:</label> <input type="text" value="{{$case->cno}}" readonly class="line-input">
-        <label>Entrusted To:</label> <input type="text" value="{{$case->jname($case->judge_id)}}" readonly class="line-input">
+        <label>Entrusted To:</label> <input type="text" value="{{$case->jname($case->judge_id)}}" readonly
+          class="line-input">
         <label>System No:</label> <input type="text" readonly class="line-input">
         <label>Court Reg. No:</label> <input type="text" readonly class="line-input">
         <label>Consignment No:</label> <input type="text" readonly class="line-input">
@@ -312,11 +323,13 @@
         <br><br>
         <div class="title">Title Of Case</div>
         <div>
-          <label>Party Name (Petitioner/ Plaintiff):</label> <input type="text" value="{{$case->p1}}" readonly class="line-input">
+          <label>Party Name (Petitioner/ Plaintiff):</label> <input type="text" value="{{$case->p1}}" readonly
+            class="line-input">
           <label>CNIC NO:</label> <input type="text" value="{{$case->cnic}}" readonly class="line-input">
           <label>CELL NO:</label> <input type="text" value="{{$case->m1}}" readonly class="line-input">
-          <label>E-MAIL ADDRESS (If Any):</label> <input type="email" readonly class="line-input">
-          <label>Party Name (Respondent/Defendant):</label> <input type="text" value="{{$case->p2}}" readonly class="line-input">
+          <!-- <label>E-MAIL ADDRESS (If Any):</label> <input type="email" readonly class="line-input"> -->
+          <label>Party Name (Respondent/Defendant):</label> <input type="text" value="{{$case->p2}}" readonly
+            class="line-input">
           <label>CNIC NO:</label> <input type="text" readonly class="line-input">
           <label>E-MAIL ADDRESS (If Any):</label> <input type="email" readonly class="line-input">
         </div>
@@ -329,4 +342,5 @@
     </div>
   </div>
 </body>
+
 </html>

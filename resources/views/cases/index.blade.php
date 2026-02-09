@@ -196,8 +196,7 @@
                                 <td>{{ $product->caset }}</td>
                                 <td>
                                     @if($product->pic)
-                                        <img src="{{ url('storage/app/' . $product->pic) }}" alt=""
-                                            style="width: 50px; height:50px">
+                                        <img src="{{ asset('public/' . $product->pic) }}" alt="" style="width: 50px; height:50px">
                                     @endif
                                 </td>
                                 <td>{{ $product->cnic }}</td>
@@ -357,7 +356,8 @@
                                         <option value="">Select:</option>
                                         @foreach($subcats as $s)
                                             <option value="{{$s->id}}" class="subcat-option-new" data-cat-id="{{$s->cat_id}}">
-                                                {{$s->name}}</option>
+                                                {{$s->name}}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -857,224 +857,224 @@
                         // Load existing image if available
                         initializeImagesNew();
                         if (data.pic) {
-                            var imageUrl = "{{ url('storage/app') }}" + '/' + data.pic;
-                            var imagePath = data.pic;
-                            // Store existing image path for reference
-                            $('#hidden-images-inputs-new').append('<input type="hidden" name="existing_image" value="' + imagePath + '">');
-                            // Display existing image
-                            var gallery = $('#images-gallery-new');
-                            var col = $('<div class="col-md-3 col-sm-4 col-6"></div>');
-                            var wrapper = $('<div class="image-item-wrapper" data-existing="true"></div>');
-                            var img = $('<img src="' + imageUrl + '" alt="Existing Image">');
-                            var removeBtn = $('<button type="button" class="remove-image-btn" data-image-id="existing" data-type="existing">&times;</button>');
-                            wrapper.append(img).append(removeBtn);
-                            col.append(wrapper);
-                            gallery.append(col);
-                            $('#no-images-message').hide();
-                        }
+                            var imageUrl = "{{ asset('public') }}/" + data.pic;
+                                  var imagePath = data.pic;
+                                    // Store existing image path for reference
+                                    $('#hidden-images-inputs-new').append('<input type="hidden" name="existing_image" value="' + imagePath + '">');
+                                    // Display existing image
+                                    var gallery = $('#images-gallery-new');
+                                    var col = $('<div class="col-md-3 col-sm-4 col-6"></div>');
+                                    var wrapper = $('<div class="image-item-wrapper" data-existing="true"></div>');
+                                    var img = $('<img src="' + imageUrl + '" alt="Existing Image">');
+                                    var removeBtn = $('<button type="button" class="remove-image-btn" data-image-id="existing" data-type="existing">&times;</button>');
+                                    wrapper.append(img).append(removeBtn);
+                                    col.append(wrapper);
+                                    gallery.append(col);
+                                    $('#no-images-message').hide();
+                                }
 
-                        var casetValue = $('#caset_new').val();
+                                var casetValue = $('#caset_new').val();
 
-                        if (casetValue === 'Civil/Family Case') {
-                            modalTitle = "Edit Civil/Family Institution";
-                            $('#institution_type_new').val('civil');
-                            $('#criminal_details_new').hide();
-                            $('#civil_details_new').hide();
-                        } else if (casetValue === 'Criminal/Case') {
-                            modalTitle = "Edit Criminal Institution";
-                            $('#institution_type_new').val('criminal');
-                            $('#criminal_details_new').show();
-                            $('#civil_details_new').hide();
-                        } else if (casetValue === 'Misc. Case') {
-                            modalTitle = "Edit Misc. Case Institution";
-                            $('#institution_type_new').val('misc');
-                            $('#criminal_details_new').hide();
-                            $('#civil_details_new').show();
-                        }
-                    })
-                });
+                                if (casetValue === 'Civil/Family Case') {
+                                    modalTitle = "Edit Civil/Family Institution";
+                                    $('#institution_type_new').val('civil');
+                                    $('#criminal_details_new').hide();
+                                    $('#civil_details_new').hide();
+                                } else if (casetValue === 'Criminal/Case') {
+                                    modalTitle = "Edit Criminal Institution";
+                                    $('#institution_type_new').val('criminal');
+                                    $('#criminal_details_new').show();
+                                    $('#civil_details_new').hide();
+                                } else if (casetValue === 'Misc. Case') {
+                                    modalTitle = "Edit Misc. Case Institution";
+                                    $('#institution_type_new').val('misc');
+                                    $('#criminal_details_new').hide();
+                                    $('#civil_details_new').show();
+                                }
+                            })
+                        });
 
-                // Save Button - New UI
-                $('#saveBtnNew').click(function (e) {
-                    e.preventDefault();
+                        // Save Button - New UI
+                        $('#saveBtnNew').click(function (e) {
+                            e.preventDefault();
 
-                    // Validate CNIC format before submission
-                    var cnicValue = $('#cnic_new').val().trim();
-                    if (cnicValue !== '') {
-                        if (!validateCNIC()) {
-                            $('#cnic_new').focus();
-                            return false;
-                        }
-                    }
+                            // Validate CNIC format before submission
+                            var cnicValue = $('#cnic_new').val().trim();
+                            if (cnicValue !== '') {
+                                if (!validateCNIC()) {
+                                    $('#cnic_new').focus();
+                                    return false;
+                                }
+                            }
 
-                    // Check if form is valid
-                    var form = document.getElementById('productFormNew');
-                    if (!form.checkValidity()) {
-                        form.classList.add('was-validated');
-                        return false;
-                    }
+                            // Check if form is valid
+                            var form = document.getElementById('productFormNew');
+                            if (!form.checkValidity()) {
+                                form.classList.add('was-validated');
+                                return false;
+                            }
 
-                    $(this).html('Saving...');
+                            $(this).html('Saving...');
 
-                    // Create FormData to handle file uploads
-                    var formData = new FormData($('#productFormNew')[0]);
+                            // Create FormData to handle file uploads
+                            var formData = new FormData($('#productFormNew')[0]);
 
-                    // For backward compatibility, send first image as 'image' (base64)
-                    // Priority: First captured image (base64) for main image field
-                    if (capturedImagesNew.length > 0) {
-                        formData.append('image', capturedImagesNew[0]);
-                        // Add remaining captured images to array
-                        for (var i = 1; i < capturedImagesNew.length; i++) {
-                            formData.append('captured_images[]', capturedImagesNew[i]);
-                        }
-                    }
+                            // For backward compatibility, send first image as 'image' (base64)
+                            // Priority: First captured image (base64) for main image field
+                            if (capturedImagesNew.length > 0) {
+                                formData.append('image', capturedImagesNew[0]);
+                                // Add remaining captured images to array
+                                for (var i = 1; i < capturedImagesNew.length; i++) {
+                                    formData.append('captured_images[]', capturedImagesNew[i]);
+                                }
+                            }
 
-                    // Add all uploaded files
-                    uploadedImagesNew.forEach(function (file, index) {
-                        formData.append('uploaded_images[]', file);
-                    });
+                            // Add all uploaded files
+                            uploadedImagesNew.forEach(function (file, index) {
+                                formData.append('uploaded_images[]', file);
+                            });
 
-                    // Add total images count
-                    var totalImages = capturedImagesNew.length + uploadedImagesNew.length;
-                    formData.append('total_images', totalImages);
+                            // Add total images count
+                            var totalImages = capturedImagesNew.length + uploadedImagesNew.length;
+                            formData.append('total_images', totalImages);
 
-                    // If no captured images but we have uploaded files, 
-                    // backend will need to handle the first uploaded file as the main image
-                    if (capturedImagesNew.length === 0 && uploadedImagesNew.length > 0) {
-                        formData.append('use_first_uploaded_as_main', '1');
-                    }
+                            // If no captured images but we have uploaded files, 
+                            // backend will need to handle the first uploaded file as the main image
+                            if (capturedImagesNew.length === 0 && uploadedImagesNew.length > 0) {
+                                formData.append('use_first_uploaded_as_main', '1');
+                            }
 
-                    $.ajax({
-                        data: formData,
-                        url: "{{ route('cases.store') }}",
-                        type: "POST",
-                        processData: false,
-                        contentType: false,
-                        dataType: 'json',
-                        success: function (data) {
-                            $('#productFormNew').trigger("reset");
-                            // Set today's date for date fields after reset
-                            var today = new Date().toISOString().split('T')[0];
-                            $('#i_date_new').val(today);
-                            $('#a_date_new').val(today);
-                            $('#o_date_new').val(today);
-                            $('#ajaxModelNew').modal('hide');
-                            // Reload page to show updated data
-                            location.reload();
-                        },
-                        error: function (data) {
-                            console.log('Error:', data);
-                            var err = jQuery.parseJSON(data.responseText);
-                            console.log(err.message);
-                            alert(err.message);
-                            $('#saveBtnNew').html('Save');
-                        }
-                    });
-                });
+                            $.ajax({
+                                data: formData,
+                                url: "{{ route('cases.store') }}",
+                                type: "POST",
+                                processData: false,
+                                contentType: false,
+                                dataType: 'json',
+                                success: function (data) {
+                                    $('#productFormNew').trigger("reset");
+                                    // Set today's date for date fields after reset
+                                    var today = new Date().toISOString().split('T')[0];
+                                    $('#i_date_new').val(today);
+                                    $('#a_date_new').val(today);
+                                    $('#o_date_new').val(today);
+                                    $('#ajaxModelNew').modal('hide');
+                                    // Reload page to show updated data
+                                    location.reload();
+                                },
+                                error: function (data) {
+                                    console.log('Error:', data);
+                                    var err = jQuery.parseJSON(data.responseText);
+                                    console.log(err.message);
+                                    alert(err.message);
+                                    $('#saveBtnNew').html('Save');
+                                }
+                            });
+                        });
 
-                // Delete Product - New UI
-                $(document).on('click', '.deleteProduct', function () {
-                    var product_id = $(this).data("id");
-                    if (!confirm('Are You sure want to delete ! ')) {
-                        return false;
-                    } else {
-                        $.ajax({
-                            type: "DELETE",
-                            url: "{{ route('cases.store') }}" + '/' + product_id,
-                            success: function (data) {
-                                // Reload page to show updated data
-                                location.reload();
-                            },
-                            error: function (data) {
-                                var err = jQuery.parseJSON(data.responseText);
-                                console.log(err.message);
-                                alert(err.errors);
-                                console.log('Error:', data.responseText);
+                        // Delete Product - New UI
+                        $(document).on('click', '.deleteProduct', function () {
+                            var product_id = $(this).data("id");
+                            if (!confirm('Are You sure want to delete ! ')) {
+                                return false;
+                            } else {
+                                $.ajax({
+                                    type: "DELETE",
+                                    url: "{{ route('cases.store') }}" + '/' + product_id,
+                                    success: function (data) {
+                                        // Reload page to show updated data
+                                        location.reload();
+                                    },
+                                    error: function (data) {
+                                        var err = jQuery.parseJSON(data.responseText);
+                                        console.log(err.message);
+                                        alert(err.errors);
+                                        console.log('Error:', data.responseText);
+                                    }
+                                });
                             }
                         });
-                    }
-                });
 
-                // Webcam Setup - New UI
-                Webcam.set({
-                    width: 490,
-                    height: 350,
-                    image_format: 'jpeg',
-                    jpeg_quality: 90
-                });
+                        // Webcam Setup - New UI
+                        Webcam.set({
+                            width: 490,
+                            height: 350,
+                            image_format: 'jpeg',
+                            jpeg_quality: 90
+                        });
 
-                // Attach to different camera element
-                window.attachCameraNew = function () {
-                    Webcam.attach('#my_camera_new');
-                }
-
-                // Take Snapshot - New UI
-                window.take_snapshot_new = function () {
-                    Webcam.snap(function (data_uri) {
-                        $(".image-tag-new").val(data_uri);
-                        // Add captured image to array
-                        capturedImagesNew.push(data_uri);
-                        updateImagesDisplayNew();
-                        $('#ajaxModelNew').modal('show');
-
-                        if ($('#institution_type_new').val() === 'civil') {
-                            $('#criminal_details_new').hide();
-                            $('#civil_details_new').hide();
-                        } else if ($('#institution_type_new').val() === 'criminal') {
-                            $('#criminal_details_new').show();
-                            $('#civil_details_new').hide();
-                        } else if ($('#institution_type_new').val() === 'misc') {
-                            $('#criminal_details_new').hide();
-                            $('#civil_details_new').show();
+                        // Attach to different camera element
+                        window.attachCameraNew = function () {
+                            Webcam.attach('#my_camera_new');
                         }
+
+                        // Take Snapshot - New UI
+                        window.take_snapshot_new = function () {
+                            Webcam.snap(function (data_uri) {
+                                $(".image-tag-new").val(data_uri);
+                                // Add captured image to array
+                                capturedImagesNew.push(data_uri);
+                                updateImagesDisplayNew();
+                                $('#ajaxModelNew').modal('show');
+
+                                if ($('#institution_type_new').val() === 'civil') {
+                                    $('#criminal_details_new').hide();
+                                    $('#civil_details_new').hide();
+                                } else if ($('#institution_type_new').val() === 'criminal') {
+                                    $('#criminal_details_new').show();
+                                    $('#civil_details_new').hide();
+                                } else if ($('#institution_type_new').val() === 'misc') {
+                                    $('#criminal_details_new').hide();
+                                    $('#civil_details_new').show();
+                                }
+                            });
+                        }
+
+                        // Helper function for CNIC submission - New UI
+                        window.sendvalueNew = function (event) {
+                            event.preventDefault();
+                            var cnic = document.getElementById('cnic_new').value;
+
+                            if (cnic) {
+                                var actionUrl = '{{ route("excases") }}';
+                                var form = document.createElement('form');
+                                form.method = 'POST';
+                                form.action = actionUrl;
+                                form.target = '_blank';
+
+                                var csrfInput = document.createElement('input');
+                                csrfInput.type = 'hidden';
+                                csrfInput.name = '_token';
+                                csrfInput.value = '{{ csrf_token() }}';
+                                form.appendChild(csrfInput);
+
+                                var cnicInput = document.createElement('input');
+                                cnicInput.type = 'hidden';
+                                cnicInput.name = 'id';
+                                cnicInput.value = cnic;
+                                form.appendChild(cnicInput);
+
+                                document.body.appendChild(form);
+                                form.submit();
+                                document.body.removeChild(form);
+                            } else {
+                                alert('Please enter a CNIC first.');
+                            }
+                        }
+
+                        // Attach camera when modal opens
+                        $('#exampleModalNew').on('shown.bs.modal', function () {
+                            attachCameraNew();
+                        });
                     });
-                }
 
-                // Helper function for CNIC submission - New UI
-                window.sendvalueNew = function (event) {
-                    event.preventDefault();
-                    var cnic = document.getElementById('cnic_new').value;
-
-                    if (cnic) {
-                        var actionUrl = '{{ route("excases") }}';
-                        var form = document.createElement('form');
-                        form.method = 'POST';
-                        form.action = actionUrl;
-                        form.target = '_blank';
-
-                        var csrfInput = document.createElement('input');
-                        csrfInput.type = 'hidden';
-                        csrfInput.name = '_token';
-                        csrfInput.value = '{{ csrf_token() }}';
-                        form.appendChild(csrfInput);
-
-                        var cnicInput = document.createElement('input');
-                        cnicInput.type = 'hidden';
-                        cnicInput.name = 'id';
-                        cnicInput.value = cnic;
-                        form.appendChild(cnicInput);
-
-                        document.body.appendChild(form);
-                        form.submit();
-                        document.body.removeChild(form);
-                    } else {
-                        alert('Please enter a CNIC first.');
+                    // Helper function for modal
+                    function addclass() {
+                        $('body').addClass('modal-open');
                     }
-                }
 
-                // Attach camera when modal opens
-                $('#exampleModalNew').on('shown.bs.modal', function () {
-                    attachCameraNew();
-                });
-            });
-
-            // Helper function for modal
-            function addclass() {
-                $('body').addClass('modal-open');
-            }
-
-            // ============ END NEW UI JAVASCRIPT LOGIC ============
-        </script>
+                    // ============ END NEW UI JAVASCRIPT LOGIC ============
+                </script>
     @endpush
 
 

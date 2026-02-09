@@ -146,92 +146,78 @@ class CaseController extends Controller
      */
     public function store(Request $request)
     {
+        $file = null;
 
-        if ($request->image) {
+        // Handle base64 webcam capture
+        if ($request->image && strpos($request->image, 'base64') !== false) {
             $img = $request->image;
 
-            $folderPath = "uploads/";
-
-
-
             $image_parts = explode(";base64,", $img);
-
-            $image_type_aux = explode("image/", $image_parts[0]);
-
-            $image_type = $image_type_aux[1];
-
-
-
             $image_base64 = base64_decode($image_parts[1]);
-
             $fileName = uniqid() . '.png';
 
-
-
-            $file = $folderPath . $fileName;
-
-            Storage::put($file, $image_base64);
-        } else {
-            $file = $request->image1;
+            // Save directly to public/uploads folder
+            $uploadPath = public_path('uploads');
+            if (!file_exists($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
+            }
+            file_put_contents($uploadPath . '/' . $fileName, $image_base64);
+            $file = 'uploads/' . $fileName;
         }
+        // Handle uploaded file images
+        elseif ($request->hasFile('uploaded_images')) {
+            $uploadedFile = $request->file('uploaded_images')[0];
+            $fileName = uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
+
+            // Save directly to public/uploads folder
+            $uploadedFile->move(public_path('uploads'), $fileName);
+            $file = 'uploads/' . $fileName;
+        }
+        // Keep existing image if no new image is uploaded (for edit mode)
+        elseif ($request->existing_image) {
+            $file = $request->existing_image;
+        }
+        // Build the data array
+        $data = [
+            'p1' => $request->p1,
+            'p2' => $request->p2,
+            'a_date' => $request->a_date,
+            'cno' => $request->cno,
+            'caset' => $request->caset,
+            'm1' => $request->m1,
+            'm2' => $request->m2,
+            'cnic' => $request->cnic,
+            'i_date' => $request->i_date,
+            'i_no' => $request->i_no,
+            'cat' => $request->cat,
+            'subcat' => $request->subcat,
+            'c_type' => $request->c_type,
+            'fir_no' => $request->fir_no,
+            'fir_year' => $request->fir_year,
+            'offence' => $request->offence,
+            'jur' => $request->jur,
+            'app_against' => $request->app_against,
+            'o_date' => $request->o_date,
+            'court_name' => $request->court_name,
+            'judge_id' => $request->judge_id,
+            'ps_id' => $request->ps_id,
+        ];
+
+        // Only update pic if we have a file
+        if ($file) {
+            $data['pic'] = $file;
+        }
+
         if ($request->user_id != "") {
+            $data['user_id'] = $request->user_id;
             Cases::updateOrCreate(
                 ['id' => $request->product_id],
-                [
-                    'p1' => $request->p1,
-                    'p2' => $request->p2,
-                    'a_date' => $request->a_date,
-                    'cno' => $request->cno,
-                    'caset' => $request->caset,
-                    'm1' => $request->m1,
-                    'm2' => $request->m2,
-                    'cnic' => $request->cnic,
-                    'i_date' => $request->i_date,
-                    'i_no' => $request->i_no,
-                    'cat' => $request->cat,
-                    'subcat' => $request->subcat,
-                    'c_type' => $request->c_type,
-                    'fir_no' => $request->fir_no,
-                    'fir_year' => $request->fir_year,
-                    'offence' => $request->offence,
-                    'jur' => $request->jur,
-                    'app_against' => $request->app_against,
-                    'o_date' => $request->o_date,
-                    'court_name' => $request->court_name,
-                    'judge_id' => $request->judge_id,
-                    'user_id' => $request->user_id,
-                    'ps_id' => $request->ps_id,
-                    'pic' => $file
-                ]
+                $data
             );
         } else {
             Auth()->user()->Cases()->updateOrCreate(
                 ['id' => $request->product_id],
-                [
-                    'p1' => $request->p1,
-                    'p2' => $request->p2,
-                    'a_date' => $request->a_date,
-                    'cno' => $request->cno,
-                    'caset' => $request->caset,
-                    'm1' => $request->m1,
-                    'm2' => $request->m2,
-                    'cnic' => $request->cnic,
-                    'i_date' => $request->i_date,
-                    'i_no' => $request->i_no,
-                    'cat' => $request->cat,
-                    'subcat' => $request->subcat,
-                    'c_type' => $request->c_type,
-                    'fir_no' => $request->fir_no,
-                    'fir_year' => $request->fir_year,
-                    'offence' => $request->offence,
-                    'jur' => $request->jur,
-                    'app_against' => $request->app_against,
-                    'o_date' => $request->o_date,
-                    'court_name' => $request->court_name,
-                    'judge_id' => $request->judge_id,
-                    'ps_id' => $request->ps_id,
-                    'pic' => $file
-                ]
+                $data
             );
 
         }
